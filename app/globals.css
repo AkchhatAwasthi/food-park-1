@@ -3,25 +3,100 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #1C1C1A; /* Pantone Black 7 C - Rich Black */
+  --foreground: #D0D0CE; /* Cool Gray 2 C */
+  --forest: #3D4A2E;     /* Pantone 7735 C */
+  --lime: #D4DF00;       /* Pantone 5845 C */
+  --cream: #EDD9B4;      /* Pantone 7506 C */
+  --acid: #C8D400;       /* Pantone 3955 C */
+  --white: #FFFFFF;
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  font-family: var(--font-dmsans), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1C1C1A;
+}
+::-webkit-scrollbar-thumb {
+  background: #3D4A2E;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4DF00;
+}
+
+/* Typography Overrides */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-syne), sans-serif;
+  color: var(--cream);
+  letter-spacing: -0.03em;
+}
+
+/* SVG Grain Texture Overlay */
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
   }
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.animate-marquee-strip {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Utility: Card Glow Hover */
+.card-glow-hover {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-glow-hover:hover {
+  border-color: var(--lime) !important;
+  box-shadow: 0 10px 30px -10px rgba(212, 223, 0, 0.25);
+  transform: translateY(-6px);
+}
+
+.card-glow-hover-deep {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-glow-hover-deep:hover {
+  border-color: var(--lime) !important;
+  box-shadow: 0 12px 35px -12px rgba(212, 223, 0, 0.3);
+  transform: translateY(-8px);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
