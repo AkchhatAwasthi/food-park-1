@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ChevronDown, Sparkles, MapPin, TrendingUp } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import ScrollReveal, { ScrollRevealItem } from "@/components/ScrollReveal";
 import MarqueeTicker from "@/components/MarqueeTicker";
 import StatCounter from "@/components/StatCounter";
@@ -92,6 +92,35 @@ export default function HomeClient() {
       return [...rest, first];
     });
   };
+
+  const [hasSwapped, setHasSwapped] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const stackRef = useRef<HTMLDivElement>(null);
+  const isStackInView = useInView(stackRef, { once: true, amount: 0.3 });
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile && isStackInView) {
+      const autoRotateTimer = setTimeout(() => {
+        setHasSwapped((prev) => {
+          if (!prev) {
+            rotateHeroStack();
+            return true;
+          }
+          return prev;
+        });
+      }, 3000);
+      return () => clearTimeout(autoRotateTimer);
+    }
+  }, [isMobile, isStackInView]);
 
   const heroImages = [
     {
@@ -245,41 +274,61 @@ export default function HomeClient() {
             </ScrollReveal>
           </div>
 
-          <div className="w-full lg:w-[45%] flex justify-center items-center relative h-[360px] sm:h-[480px] lg:h-[550px] mt-12 lg:mt-0">
+          <div ref={stackRef} className="w-full lg:w-[45%] flex justify-center items-center relative h-[360px] sm:h-[480px] lg:h-[550px] mt-12 lg:mt-0">
             <ScrollReveal delay={0.5} className="relative w-full h-full flex justify-center items-center">
-              {heroImages.map((imgInfo, idx) => (
-                <motion.div
-                  key={idx}
-                  style={{
-                    position: "absolute",
-                    transformOrigin: "bottom center",
-                  }}
-                  animate={getHeroCardStyles(idx)}
-                  transition={{
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 22,
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    if (heroStack.indexOf(idx) === 0) {
-                      rotateHeroStack();
-                    }
-                  }}
-                  className={`w-[180px] h-[240px] sm:w-[260px] sm:h-[350px] lg:w-[320px] lg:h-[420px] rounded-[2rem] border-2 ${imgInfo.colorClass} overflow-hidden shadow-2xl cursor-pointer select-none`}
-                >
-                  <img
-                    src={imgInfo.src}
-                    alt={imgInfo.title}
-                    className="w-full h-full object-cover pointer-events-none"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-richblack via-transparent to-transparent flex items-end p-6 pointer-events-none">
-                    <span className={`font-syne font-bold text-sm sm:text-base lg:text-lg ${imgInfo.textClass}`}>
-                      {imgInfo.title}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
+              {heroImages.map((imgInfo, idx) => {
+                const orderIndex = heroStack.indexOf(idx);
+                return (
+                  <motion.div
+                    key={idx}
+                    style={{
+                      position: "absolute",
+                      transformOrigin: "bottom center",
+                    }}
+                    animate={getHeroCardStyles(idx)}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 22,
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      if (orderIndex === 0) {
+                        rotateHeroStack();
+                        setHasSwapped(true);
+                      }
+                    }}
+                    className={`w-[180px] h-[240px] sm:w-[260px] sm:h-[350px] lg:w-[320px] lg:h-[420px] rounded-[2rem] border-2 ${imgInfo.colorClass} overflow-hidden shadow-2xl cursor-pointer select-none relative`}
+                  >
+                    <img
+                      src={imgInfo.src}
+                      alt={imgInfo.title}
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-richblack via-transparent to-transparent flex items-end p-6 pointer-events-none">
+                      <span className={`font-syne font-bold text-sm sm:text-base lg:text-lg ${imgInfo.textClass}`}>
+                        {imgInfo.title}
+                      </span>
+                    </div>
+
+                    {/* Visual Tap Instruction Hint (Mobile Only) */}
+                    {isMobile && orderIndex === 0 && !hasSwapped && (
+                      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center pointer-events-none z-30">
+                        <motion.div
+                          animate={{ scale: [1, 1.12, 1] }}
+                          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+                          className="bg-lime text-richblack font-spacegrotesk text-[10px] sm:text-xs uppercase font-extrabold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg border border-lime/30"
+                        >
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5" />
+                          </svg>
+                          <span>Tap to Swap</span>
+                        </motion.div>
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
             </ScrollReveal>
           </div>
         </div>
