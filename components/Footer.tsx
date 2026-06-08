@@ -9,9 +9,13 @@ export default function Footer() {
         <div className="space-y-4">
           <Link
             href="/"
-            className="font-dailywalker text-3xl font-normal tracking-wide text-forest block animate-pulse-slow"
+            className="block hover:opacity-90 transition-opacity"
           >
-            Foodpark
+            <img
+              src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780901297/foodpark_logo_oizi3x.png"
+              alt="Foodpark Logo"
+              className="h-10 w-auto object-contain"
+            />
           </Link>
           <p className="text-richblack/70 text-sm max-w-xs leading-relaxed">
             One Kitchen. Ten Brands. Infinite Possibilities.

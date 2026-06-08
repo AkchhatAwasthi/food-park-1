@@ -45,9 +45,13 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-dailywalker text-3xl font-normal tracking-wide text-forest hover:opacity-90 transition-opacity"
+            className="flex items-center hover:opacity-90 transition-opacity"
           >
-            Foodpark
+            <img
+              src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780901297/foodpark_logo_oizi3x.png"
+              alt="Foodpark Logo"
+              className="h-8 md:h-10 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Nav Links */}
@@ -107,9 +111,17 @@ export default function Navbar() {
           >
             {/* Header in Mobile Menu */}
             <div className="flex items-center justify-between">
-              <span className="font-dailywalker text-3xl font-normal tracking-wide text-forest">
-                Foodpark
-              </span>
+              <Link
+                href="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center hover:opacity-90 transition-opacity"
+              >
+                <img
+                  src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780901297/foodpark_logo_oizi3x.png"
+                  alt="Foodpark Logo"
+                  className="h-8 w-auto object-contain"
+                />
+              </Link>
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-2 text-lime hover:text-acid transition-colors"
