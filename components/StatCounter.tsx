@@ -47,7 +47,7 @@ export default function StatCounter({
   return (
     <span
       ref={ref}
-      className="font-spacegrotesk text-4xl md:text-5xl lg:text-[64px] font-extrabold text-lime block leading-none tracking-tight mb-2"
+      className="font-spacegrotesk text-3xl sm:text-4xl md:text-[44px] lg:text-[44px] xl:text-[52px] font-extrabold text-lime block leading-none tracking-tight mb-2"
     >
       {prefix}0{suffix}
     </span>

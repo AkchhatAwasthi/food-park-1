@@ -473,31 +473,31 @@ export default function HomeClient() {
       {/* SECTION 4 — ANIMATED STATS */}
       <section className="bg-forest py-16 md:py-20 relative z-10 overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 md:px-8">
-          <ScrollReveal staggerChildren className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-0">
-            <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:border-r last:border-r-0 border-lime/30 lg:px-4">
+          <ScrollReveal staggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-4 lg:gap-8">
+            <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:border-r last:border-r-0 border-lime/30 lg:px-6">
               <StatCounter value={350000} prefix="₹" isCurrency />
-              <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold">
+              <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold mt-1">
                 One-Time Investment
               </p>
             </ScrollRevealItem>
 
             <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:border-r last:border-r-0 border-lime/30 lg:px-4">
               <StatCounter value={15000} prefix="₹" suffix="/mo" isCurrency />
-              <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold">
+              <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold mt-1">
                 Fixed Monthly Returns
               </p>
             </ScrollRevealItem>
 
-            <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:border-r last:border-r-0 border-lime/30 lg:px-4">
+            <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:border-r last:border-r-0 border-lime/30 lg:px-6">
               <StatCounter value={20} prefix="~" suffix=" Months" />
-              <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold">
+              <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold mt-1">
                 Payback Period
               </p>
             </ScrollRevealItem>
 
-            <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:px-4">
+            <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:px-6">
               <StatCounter value={370} suffix="%" />
-              <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold">
+              <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold mt-1">
                 4-Year Growth
               </p>
             </ScrollRevealItem>
