@@ -3,16 +3,16 @@ import BrandsClient from "@/components/BrandsClient";
 
 export function generateMetadata(): Metadata {
   return {
-    title: "Our Brands — Foodpark | 10 Multi-Cuisine Cloud Kitchen Concepts",
+    title: "Our Brands — Foodpark | 10 Unique Cloud Kitchen Food Concepts in Lucknow",
     description:
-      "Explore Foodpark's 10 diverse food brands — from Mughlai to South Indian, Chinese to Chai — each crafted for India's varied food lovers.",
+      "Explore 10 unique food brands under the Foodpark cloud kitchen network — Mughlai, Chinese, Biryani, South Indian, Street Food, Chai, and more. The best multi-brand cloud kitchen in Lucknow.",
     alternates: {
       canonical: "https://www.foodparkindia.com/brands",
     },
     openGraph: {
-      title: "Our Brands — Foodpark | 10 Multi-Cuisine Cloud Kitchen Concepts",
+      title: "Our Brands — Foodpark | 10 Unique Cloud Kitchen Food Concepts in Lucknow",
       description:
-        "Explore Foodpark's 10 diverse food brands — from Mughlai to South Indian, Chinese to Chai — each crafted for India's varied food lovers.",
+        "Explore 10 unique food brands under the Foodpark cloud kitchen network — Mughlai, Chinese, Biryani, South Indian, Street Food, Chai, and more. The best multi-brand cloud kitchen in Lucknow.",
       url: "https://www.foodparkindia.com/brands",
     },
   };

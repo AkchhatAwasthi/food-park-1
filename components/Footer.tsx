@@ -14,7 +14,10 @@ export default function Footer() {
             Foodpark
           </Link>
           <p className="text-richblack/70 text-sm max-w-xs leading-relaxed">
-            One Vision. One Mission. Endless Possibilities.
+            One Kitchen. Ten Brands. Infinite Possibilities.
+          </p>
+          <p className="text-richblack/50 text-xs max-w-xs leading-relaxed mt-2">
+            Foodpark is India&apos;s most ambitious multi-brand cloud kitchen network — built in Lucknow, scaling nationally, and designed to make food entrepreneurship accessible to everyone.
           </p>
         </div>
 
@@ -88,7 +91,7 @@ export default function Footer() {
 
       <div className="max-w-[1280px] mx-auto mt-16 pt-8 border-t border-forest/10 flex flex-col items-center justify-center">
         <p className="text-xs text-richblack/60 text-center">
-          © 2026 Foodpark. A New Era of Food Entrepreneurship.
+          © 2026 Foodpark Ventures India. All rights reserved. Foodpark is a registered trademark of Foodpark Ventures India, headquartered in Lucknow, Uttar Pradesh, India.
         </p>
       </div>
     </footer>

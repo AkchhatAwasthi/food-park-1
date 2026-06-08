@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useModal } from "@/context/ModalContext";
 import { ArrowRight, Phone, Mail, Globe } from "lucide-react";
 import { motion } from "framer-motion";
@@ -9,6 +9,7 @@ import SectionTag from "@/components/SectionTag";
 
 export default function FranchiseClient() {
   const { openModal } = useModal();
+  const [dailySales, setDailySales] = useState(5000);
 
   const steps = [
     { num: "01", label: "You Invest" },
@@ -19,67 +20,78 @@ export default function FranchiseClient() {
 
   const advantages = [
     {
-      title: "Low Investment",
-      desc: "Entry from ₹2.9 Lakh setup capital, with full kitchen infrastructure access.",
+      title: "Genuinely Low Entry Point",
+      desc: "Most food businesses demand 10–50 lakh rupees just to open doors. Foodpark's franchise entry starts at ₹2.9 lakh — an investment level designed to be realistic, achievable, and accessible for salaried professionals, small business owners, and first-time investors.",
     },
     {
-      title: "Zero Monthly Expenses",
-      desc: "No recurring operations, utilities, or maintenance bills billed to you.",
+      title: "Zero Monthly Overhead — Seriously, Zero",
+      desc: "No monthly rent contribution. No staff salary liability. No supply cost reconciliation. No electricity bill surprises. Foodpark absorbs all recurring operational costs entirely. Every rupee of your return is net of all the costs we carry.",
     },
     {
-      title: "No Equipment Needed",
-      desc: "Industrial appliances and setups managed and installed by Foodpark.",
+      title: "No Equipment. No Kitchen Setup.",
+      desc: "Commercial kitchen equipment — industrial ovens, refrigeration units, exhaust systems, POS hardware — runs to lakhs. Foodpark's existing kitchen infrastructure means you never spend a paisa on this. You don't buy a kitchen — you buy into a system.",
     },
     {
-      title: "Staff-Free Operation",
-      desc: "Kitchen HR, chefs, delivery runners, and managers hired & run by us.",
+      title: "No Staff Management — Ever",
+      desc: "Managing kitchen staff is genuinely one of the hardest things in the food business. Foodpark owns that problem completely. We hire, train, retain, and manage every kitchen team member across all locations. You never receive an HR call about a kitchen situation.",
     },
     {
-      title: "Side Business Potential",
-      desc: "Completely passive earnings. Keep your full-time job while your kitchen earns.",
+      title: "The Perfect Side Business",
+      desc: "Foodpark was specifically designed to function as a fully passive investment. Whether you're a doctor, a software engineer, a government employee, or a stay-at-home parent — your cloud kitchen franchise runs 7 days a week without requiring a single minute of your time.",
     },
     {
-      title: "Full Brand Support",
-      desc: "Corporate marketing campaigns, Swiggy/Zomato listings, and supply chain.",
+      title: "Full Corporate Brand Support",
+      desc: "Foodpark provides corporate-level digital marketing, Zomato/Swiggy optimization, social media support, customer acquisition campaigns, and ongoing operational guidance. From the day your kitchen goes live, you have a full team in your corner maximizing every order and every rating.",
     },
   ];
 
   const onboardingSteps = [
     {
       step: "Step 1",
-      title: "Pay Asset Setup Fee",
-      desc: "Secure your license and setup with a ₹3,50,000 one-time investment.",
+      title: "Apply & Connect (Day 1)",
+      desc: "Fill out the franchise enquiry form or call us directly. Our team will schedule a detailed consultation call where we walk you through every aspect of the FICO model, answer every question you have, and help you decide which financial scheme fits your goals. No pressure. No hard sell. Just honest conversations.",
     },
     {
       step: "Step 2",
-      title: "Choose Your Brand",
-      desc: "Pick from 10 Foodpark sub-brands targeting high-demand cuisines.",
+      title: "Choose Your Brand & Finalize (Week 1)",
+      desc: "Once you're ready to proceed, you select your preferred Foodpark brand — or multiple brands, depending on your investment tier. We present the franchise agreement, review the terms together transparently, and complete the onboarding documentation. Everything is clear, structured, and signed with full legal compliance.",
     },
     {
       step: "Step 3",
-      title: "We Set Up & Operate",
-      desc: "All kitchen real estate, staffing, appliances, and apps handled by Foodpark.",
+      title: "We Set Up, Staff, and Launch (Weeks 2–4)",
+      desc: "Foodpark's operations team takes over completely. We integrate your brand into our existing kitchen infrastructure, configure all delivery app listings, complete the local marketing launch, and run quality checks. You receive a full setup briefing and launch report when your kitchen goes live. You don't lift a finger — except to sign the agreement.",
     },
     {
       step: "Step 4",
-      title: "You Earn Returns",
-      desc: "Monthly passive payouts directly credited to your registered bank account.",
+      title: "Receive Monthly Returns (Month 1 Onward)",
+      desc: "From month one, your returns begin flowing. If you're on the Fix Model, ₹15,000 arrives every month without fail. If you're on the Revenue Sharing Model, your royalty is calculated from verified monthly sales and deposited within the agreed timeline. Full transparency, full documentation, every single cycle.",
     },
   ];
 
   return (
     <div className="w-full bg-richblack select-none">
       {/* SECTION 1 — PAGE HERO */}
-      <section className="relative bg-forest pt-32 pb-24 md:py-[120px] px-6 md:px-8 border-b border-lime/10 overflow-hidden">
+      <section className="relative bg-richblack pt-32 pb-24 md:py-[120px] px-6 md:px-8 border-b border-lime/10 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80"
+            alt="Business Operations Chart"
+            className="w-full h-full object-cover opacity-15"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-richblack via-richblack/60 to-richblack/40 pointer-events-none" />
+        </div>
+
         <div className="grain-overlay" />
         <div className="max-w-[1280px] mx-auto relative z-10 flex flex-col items-center text-center justify-center">
           <ScrollReveal className="max-w-4xl space-y-6 flex flex-col items-center text-center mx-auto">
             <h1 className="font-syne text-[40px] sm:text-6xl md:text-8xl font-extrabold text-cream leading-[1.05] tracking-editorial">
-              <span className="block text-white">Own a Food Business.</span>
-              <span className="italic font-bold text-lime">Let Us Run It.</span>
+              <span className="block text-white">You Put In the Money.</span>
+              <span className="block text-white">We Put In the Work.</span>
+              <span className="italic font-bold text-lime">You Both Profit.</span>
             </h1>
             <p className="font-dmsans text-base md:text-xl text-gray max-w-2xl leading-relaxed mx-auto">
-              The Foodpark FICO Partnership Model — Low Investment. Zero Hassle. Real Returns.
+              This is the Foodpark FICO franchise — the most hands-free, transparent, and financially compelling cloud kitchen franchise opportunity in Lucknow and across India right now. Low entry cost. Zero operational involvement. Fixed or performance-linked returns. 48-month partnership. Real results.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -88,7 +100,7 @@ export default function FranchiseClient() {
               onClick={openModal}
               className="inline-flex items-center justify-center bg-lime text-richblack font-syne font-semibold px-8 py-4 rounded-full text-base shadow-[0_4px_20px_rgba(212,223,0,0.15)] hover:shadow-[0_4px_25px_rgba(212,223,0,0.3)] transition-shadow duration-300"
             >
-              Apply for Partnership
+              Apply for Franchise — Takes Less Than 2 Minutes
             </motion.button>
           </ScrollReveal>
         </div>
@@ -131,7 +143,7 @@ export default function FranchiseClient() {
           <div className="max-w-2xl">
             <SectionTag text="Why It Works" />
             <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
-              Partnership Advantages
+              Six Reasons This Is the Smartest Investment in the Room.
             </h2>
             <p className="font-dmsans text-sm md:text-base text-gray mt-4">
               We eliminate traditional restaurant risk factors, transforming complex food service into a turnkey financial asset.
@@ -172,10 +184,10 @@ export default function FranchiseClient() {
           <div className="max-w-2xl">
             <SectionTag text="Financial Schemes" />
             <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
-              Two Ways to Earn
+              Two Ways to Earn. Both Profitable. You Choose.
             </h2>
             <p className="font-dmsans text-sm md:text-base text-cream/80 mt-4">
-              Pick the reward structure that fits your financial goals — stable monthly cash flows or high-upside sales commission shares.
+              We&apos;ve structured two franchise models to match different investor profiles. Whether you want the certainty of a fixed monthly return or the higher upside of a performance-linked revenue share, there&apos;s a Foodpark model built for you.
             </p>
           </div>
 
@@ -225,7 +237,7 @@ export default function FranchiseClient() {
 
                 <div className="space-y-6 pt-6">
                   <p className="font-dmsans text-xs text-gray/70 italic leading-relaxed">
-                    Best For: Investors who prioritize guaranteed, predictable monthly cash flow.
+                    Best For: Investors who value guaranteed, predictable monthly income — salaried professionals, retirees, or first-time investors who want to start conservatively.
                   </p>
                   <button
                     onClick={openModal}
@@ -285,7 +297,7 @@ export default function FranchiseClient() {
 
                 <div className="space-y-6 pt-6">
                   <p className="font-dmsans text-xs text-richblack/70 italic leading-relaxed">
-                    Best For: Investors who want to maximize returns and ride cloud kitchen growth.
+                    Best For: Growth-focused investors who want maximum returns and are comfortable with performance-based income. Potentially 80% more earnings vs the Fix Model over 4 years.
                   </p>
                   <button
                     onClick={openModal}
@@ -298,6 +310,152 @@ export default function FranchiseClient() {
             </ScrollRevealItem>
           </ScrollReveal>
         </div>
+      </section>
+
+      <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
+
+      {/* SECTION 4.5 — INTERACTIVE ROI CALCULATOR */}
+      <section className="py-20 md:py-[120px] px-6 md:px-8 max-w-[1280px] mx-auto relative z-10">
+        <ScrollReveal className="space-y-12">
+          <div className="max-w-2xl">
+            <SectionTag text="ROI Simulator" />
+            <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
+              Interactive ROI Simulator
+            </h2>
+            <p className="font-dmsans text-sm md:text-base text-gray mt-4">
+              Slide to adjust the estimated average daily sales of your cloud kitchen brand and compare how the Fix Model and Revenue Sharing Model scale.
+            </p>
+          </div>
+
+          <div className="bg-[#1A1A18] border border-forest/30 p-6 md:p-10 rounded-[2rem] max-w-4xl mx-auto space-y-8 shadow-2xl">
+            {/* Slider control */}
+            <div className="space-y-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <span className="font-syne text-lg font-semibold text-cream">
+                  Estimated Average Daily Sales
+                </span>
+                <span className="font-spacegrotesk text-3xl font-extrabold text-lime bg-forest/20 border border-lime/10 px-4 py-1.5 rounded-2xl">
+                  ₹{dailySales.toLocaleString("en-IN")}
+                </span>
+              </div>
+              <input
+                type="range"
+                min="2000"
+                max="15000"
+                step="500"
+                value={dailySales}
+                onChange={(e) => setDailySales(Number(e.target.value))}
+                className="w-full h-2 bg-forest/30 rounded-lg appearance-none cursor-pointer accent-lime focus:outline-none"
+              />
+              <div className="flex justify-between text-xs text-gray/50 font-spacegrotesk">
+                <span>₹2,000 / day</span>
+                <span>₹5,000 (Conservative)</span>
+                <span>₹10,000 (Healthy)</span>
+                <span>₹15,000 / day</span>
+              </div>
+            </div>
+
+            {/* Estimated Monthly Sales Banner */}
+            <div className="bg-forest/10 border border-forest/20 p-4 rounded-xl flex justify-between items-center text-sm md:text-base font-dmsans">
+              <span className="text-gray/80">Estimated Monthly Kitchen Sales:</span>
+              <span className="font-spacegrotesk font-bold text-cream">
+                ₹{(dailySales * 30).toLocaleString("en-IN")}
+              </span>
+            </div>
+
+            {/* Side-by-side comparison */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+              {/* Fix Model Card */}
+              <div className="border border-forest/20 bg-richblack/40 p-6 md:p-8 rounded-2xl space-y-6 flex flex-col justify-between">
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="font-syne text-xl font-bold text-cream">Fix Model</span>
+                    <span className="font-spacegrotesk text-xs uppercase bg-gray/10 px-2.5 py-0.5 rounded-full text-gray border border-gray/20">
+                      Guaranteed
+                    </span>
+                  </div>
+                  <p className="font-dmsans text-xs text-gray/60">
+                    A fixed return scheme independent of actual daily kitchen performance.
+                  </p>
+                  <div className="divide-y divide-forest/10 font-dmsans text-sm">
+                    <div className="py-2 flex justify-between">
+                      <span className="text-gray/80">Monthly Income</span>
+                      <span className="font-spacegrotesk font-semibold text-cream">₹15,000</span>
+                    </div>
+                    <div className="py-2 flex justify-between">
+                      <span className="text-gray/80">Payback Period</span>
+                      <span className="font-spacegrotesk font-semibold text-cream">~23.3 Months</span>
+                    </div>
+                    <div className="py-2 flex justify-between">
+                      <span className="text-gray/80">4-Year Total Earnings</span>
+                      <span className="font-spacegrotesk font-semibold text-cream">₹7,20,000</span>
+                    </div>
+                    <div className="py-2 flex justify-between">
+                      <span className="text-gray/80">Total ROI</span>
+                      <span className="font-spacegrotesk font-semibold text-cream">205.7%</span>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={openModal}
+                  className="w-full border border-forest/30 text-cream hover:border-lime hover:text-lime font-syne font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 mt-4"
+                >
+                  Choose Fix Model
+                </button>
+              </div>
+
+              {/* Revenue Sharing Model Card */}
+              <div className="border-2 border-lime bg-lime/5 p-6 md:p-8 rounded-2xl space-y-6 flex flex-col justify-between shadow-lg relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-lime text-richblack font-spacegrotesk text-[9px] uppercase font-bold py-1 px-3 rounded-bl-lg tracking-wider">
+                  High Growth
+                </div>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="font-syne text-xl font-bold text-lime">Revenue Share</span>
+                    <span className="font-spacegrotesk text-xs uppercase bg-lime/10 px-2.5 py-0.5 rounded-full text-lime border border-lime/20">
+                      18% Royalty
+                    </span>
+                  </div>
+                  <p className="font-dmsans text-xs text-gray/60">
+                    Returns scale dynamically based on the monthly sales of your selected brand.
+                  </p>
+                  <div className="divide-y divide-lime/10 font-dmsans text-sm">
+                    <div className="py-2 flex justify-between">
+                      <span className="text-gray/80">Monthly Income</span>
+                      <span className="font-spacegrotesk font-bold text-lime">
+                        ₹{Math.round(dailySales * 30 * 0.18).toLocaleString("en-IN")}
+                      </span>
+                    </div>
+                    <div className="py-2 flex justify-between">
+                      <span className="text-gray/80">Payback Period</span>
+                      <span className="font-spacegrotesk font-bold text-lime">
+                        ~{(350000 / (dailySales * 30 * 0.18)).toFixed(1)} Months
+                      </span>
+                    </div>
+                    <div className="py-2 flex justify-between">
+                      <span className="text-gray/80">4-Year Total Earnings</span>
+                      <span className="font-spacegrotesk font-bold text-lime">
+                        ₹{Math.round(dailySales * 30 * 0.18 * 48).toLocaleString("en-IN")}
+                      </span>
+                    </div>
+                    <div className="py-2 flex justify-between">
+                      <span className="text-gray/80">Total ROI</span>
+                      <span className="font-spacegrotesk font-bold text-lime">
+                        {Math.round(((dailySales * 30 * 0.18 * 48) / 350000) * 100)}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={openModal}
+                  className="w-full bg-lime text-richblack font-syne font-bold py-2.5 rounded-xl text-sm hover:scale-[1.02] transition-transform duration-200 mt-4"
+                >
+                  Choose Revenue Share
+                </button>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
 
       <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
@@ -356,7 +514,7 @@ export default function FranchiseClient() {
           <div className="max-w-2xl">
             <SectionTag text="Onboarding Process" />
             <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
-              How It Works
+              From First Enquiry to First Return: How the Process Works.
             </h2>
             <p className="font-dmsans text-sm md:text-base text-cream/80 mt-4">
               Get your cloud kitchen investment structured and generating returns in 4 simple stages.
@@ -417,10 +575,10 @@ export default function FranchiseClient() {
       <section className="py-20 md:py-[120px] px-6 md:px-8 max-w-[1280px] mx-auto relative z-10 text-center flex flex-col items-center justify-center space-y-12">
         <ScrollReveal className="max-w-2xl space-y-4">
           <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial">
-            Start Your Foodpark Journey Today
+            Start Your Foodpark Journey Today.
           </h2>
           <p className="font-dmsans text-sm md:text-base text-gray max-w-lg mx-auto">
-            Get in touch with our partnerships office directly or submit an application to reserve your slot.
+            The cloud kitchen franchise opportunity in Lucknow — and across India — is not going to be this accessible forever. As Foodpark expands, franchise slots in premium delivery zones will become increasingly limited. Talk to our franchise team. Ask every question you have. We&apos;re ready.
           </p>
         </ScrollReveal>
 

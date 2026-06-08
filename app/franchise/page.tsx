@@ -4,17 +4,17 @@ import FranchiseClient from "@/components/FranchiseClient";
 export function generateMetadata(): Metadata {
   return {
     title:
-      "Partnership Opportunity — Foodpark FICO Model | Invest ₹3.5L, Earn Up to 370%",
+      "Franchise Opportunity — Foodpark FICO Model | Cloud Kitchen Franchise in Lucknow",
     description:
-      "Own a Foodpark cloud kitchen with just ₹3,50,000. Zero operations, fixed returns up to ₹15,000/month or revenue share of ₹27,000/month. Apply now.",
+      "Own a cloud kitchen franchise in Lucknow with Foodpark's FICO model. Invest ₹3.5L, earn up to 370% in 4 years — no operations, no staff, no hassle. Real returns, real transparency.",
     alternates: {
       canonical: "https://www.foodparkindia.com/franchise",
     },
     openGraph: {
       title:
-        "Partnership Opportunity — Foodpark FICO Model | Invest ₹3.5L, Earn Up to 370%",
+        "Franchise Opportunity — Foodpark FICO Model | Cloud Kitchen Franchise in Lucknow",
       description:
-        "Own a Foodpark cloud kitchen with just ₹3,50,000. Zero operations, fixed returns up to ₹15,000/month or revenue share of ₹27,000/month. Apply now.",
+        "Own a cloud kitchen franchise in Lucknow with Foodpark's FICO model. Invest ₹3.5L, earn up to 370% in 4 years — no operations, no staff, no hassle. Real returns, real transparency.",
       url: "https://www.foodparkindia.com/franchise",
     },
   };
