@@ -438,13 +438,13 @@ export default function HomeClient() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Real Kitchen Image */}
-           <div className="lg:col-span-5 w-full h-[400px] sm:h-[500px] lg:h-[650px] rounded-3xl overflow-hidden border border-forest/30 shadow-lg">
-  <img
-    src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780911017/WhatsApp_Image_2026-06-08_at_2.59.56_PM_wnbib2.jpg"
-    alt="Cloud Kitchen Cooking"
-    className="w-full h-full object-cover object-left"
-  />
-</div>
+            <div className="lg:col-span-5 w-full h-auto lg:h-[650px] rounded-3xl overflow-hidden border border-forest/30 shadow-lg bg-[#1A1A18]/50">
+              <img
+                src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780911017/WhatsApp_Image_2026-06-08_at_2.59.56_PM_wnbib2.jpg"
+                alt="Live Foodpark Kitchen Cooking"
+                className="w-full h-auto lg:h-full lg:object-cover lg:object-left block"
+              />
+            </div>
 
             {/* Feature Points */}
             <div className="lg:col-span-7 flex flex-col space-y-6">
