@@ -2,48 +2,88 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ChevronDown, ArrowRight, Quote } from "lucide-react";
+import { ChevronDown, Sparkles, MapPin, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal, { ScrollRevealItem } from "@/components/ScrollReveal";
 import MarqueeTicker from "@/components/MarqueeTicker";
 import StatCounter from "@/components/StatCounter";
 import SectionTag from "@/components/SectionTag";
+import { brandLogos } from "../brandLogos";
 
 export default function HomeClient() {
-  const brandTeasers = [
+  const allBrands = [
     {
       name: "Zauqeen",
       tagline: "Where Every Bite Has a History.",
       cuisine: "Mughlai Cuisine",
-      desc: "This is Mughlai cuisine the way the Nawabs intended it — slow-cooked, heavily spiced, absurdly aromatic, and completely uncompromising on flavor. From bubbling korma to perfectly sealed dum biryani, Zauqeen is a full sensory experience.",
+      desc: "Slow-cooked, heavily spiced Nawabi korma and perfectly sealed dum biryani.",
+      image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&h=800&q=80",
     },
     {
       name: "Beijing Bites",
       tagline: "Street Food That Speaks in Umami.",
       cuisine: "Chinese",
-      desc: "Bold wok energy, deep umami base notes, and the kind of char on a noodle that you only get when the flame is high and the cook is fast. Every dish calibrated to survive delivery — arriving hot, fragrant, and tasting exactly like it should.",
+      desc: "Bold wok energy, deep umami notes, and perfectly charred delivery-friendly noodles.",
+      image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&h=800&q=80",
     },
     {
       name: "Biryani Xchange",
       tagline: "Trade the Ordinary. Taste the Extraordinary.",
       cuisine: "Biryani",
-      desc: "India doesn't have one biryani — it has a hundred. Hyderabadi, Lucknowi, Kolkata, Ambur, Bombay. Biryani Xchange is where all those philosophies coexist, compete, and ultimately win.",
+      desc: "Authentic regional biryanis: Hyderabadi, Lucknowi, and Kolkata styles cooked to perfection.",
+      image: "https://res.cloudinary.com/dmj0smemf/image/upload/v1780899980/9615d1db6143c9642f6d585616b97e26_isgcag.jpg",
     },
     {
       name: "Chai Station",
       tagline: "Ek Cup, Hazaar Yaaden.",
       cuisine: "Beverages",
-      desc: "India runs on chai. Starting at just ₹20, every cup at Chai Station is brewed with intention. Masala chai with a proper punch. Ilaichi chai that lingers. Kulhad chai because the clay adds something you can't bottle.",
+      desc: "Freshly brewed masala, elaichi, and ginger chai served in traditional clay kulhads.",
+      image: "https://res.cloudinary.com/dmj0smemf/image/upload/v1780899980/d16586a319164842e439353fcf7516ae_dgpcom.jpg",
     },
     {
       name: "Salad Story",
       tagline: "Eat Fresh. Feel Best. Repeat.",
       cuisine: "Healthy",
-      desc: "Healthy food that's also genuinely delicious — every bowl calibrated for macros, portion control, and flavor. Because compromise is not on our menu.",
+      desc: "Delicious health bowls, salads, and meals calibrated for macros, portion control, and taste.",
+      image: "https://res.cloudinary.com/dmj0smemf/image/upload/v1780899980/4f3f37076824c511a357c434b63e24a4_n8dv5b.jpg",
+    },
+    {
+      name: "The Indian Plate",
+      tagline: "Ghar Jaisa Khana. Ghar Se Behtar Delivery.",
+      cuisine: "Pure Veg Indian",
+      desc: "Homestyle vegetarian comfort meals: dal tadka, rajma chawal, and fresh flatbreads.",
+      image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&h=800&q=80",
+    },
+    {
+      name: "Sambhar Sutra",
+      tagline: "Straight from the South. Delivered to Your Door.",
+      cuisine: "South Indian",
+      desc: "Crispy masala dosas, soft idlis, and hot sambhar crafted from authentic fermented batter.",
+      image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&h=800&q=80",
+    },
+    {
+      name: "Chaat Bazaar",
+      tagline: "Taste the Tradition. Own the Craving.",
+      cuisine: "Street Food",
+      desc: "Crispy golgappas, tikki chaat, and local street treats packaged to stay perfectly fresh.",
+      image: "https://res.cloudinary.com/dmj0smemf/image/upload/v1780910804/4341312ac0b006b1dfeab30e0a4ba9db_k4jjwl.jpg",
+    },
+    {
+      name: "Pizza Street",
+      tagline: "Slice Into Something Better.",
+      cuisine: "Pizza",
+      desc: "Generous, cheese-filled, hot oven pizzas infused with local fusion street flavors.",
+      image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&h=800&q=80",
+    },
+    {
+      name: "Toast Mafia",
+      tagline: "Toast It. Love It. Repeat.",
+      cuisine: "Sandwiches",
+      desc: "Gourmet grilled sandwiches with rich cheese pulls and perfectly toasted bread sides.",
+      image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&h=800&q=80",
     },
   ];
 
-  const [activeBrandIdx, setActiveBrandIdx] = useState(0);
   const [heroStack, setHeroStack] = useState([0, 1, 2, 3, 4]);
 
   const rotateHeroStack = () => {
@@ -89,7 +129,6 @@ export default function HomeClient() {
   const getHeroCardStyles = (idx: number) => {
     const orderIndex = heroStack.indexOf(idx);
     
-    // Front card styles
     if (orderIndex === 0) {
       return {
         zIndex: 50,
@@ -102,7 +141,6 @@ export default function HomeClient() {
       };
     }
     
-    // Cards behind
     const offsetMultiplier = 15;
     const rotateMultiplier = 4;
     const isEven = orderIndex % 2 === 0;
@@ -118,36 +156,12 @@ export default function HomeClient() {
     };
   };
 
-  const getCardStyles = (index: number) => {
-    const diff = (index - activeBrandIdx + 5) % 5;
-    if (diff === 0) {
-      return {
-        zIndex: 20,
-        y: 0,
-        scale: 1,
-        rotate: 0,
-        opacity: 1,
-        pointerEvents: "auto" as const,
-      };
-    }
-    return {
-      zIndex: 20 - diff,
-      y: diff * 12,
-      scale: 1 - diff * 0.04,
-      rotate: diff % 2 === 0 ? diff * 1.5 : -diff * 1.5,
-      opacity: Math.max(0, 1 - diff * 0.25),
-      pointerEvents: "none" as const,
-    };
-  };
-
   return (
-    <div className="w-full bg-richblack select-none">
+    <div className="w-full bg-richblack select-none overflow-x-hidden">
       {/* SECTION 1 — HERO */}
-      <section className="relative min-h-screen lg:h-svh w-full flex flex-col justify-between overflow-hidden pt-28 pb-12 lg:py-20">
-        {/* CSS grain texture overlay */}
+      <section className="relative min-h-screen lg:h-svh w-full flex flex-col justify-between overflow-hidden pt-28 pb-12 lg:py-20 px-5 md:px-8 lg:px-16">
         <div className="grain-overlay z-10" />
 
-        {/* Chef tossing vegetables in a wok video background */}
         <video
           autoPlay
           loop
@@ -161,26 +175,19 @@ export default function HomeClient() {
           />
         </video>
 
-        {/* Gradient Overlay for Readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-richblack via-richblack/65 to-richblack/40 pointer-events-none z-0" />
-
-        {/* Subtle radial green bloom */}
         <div className="absolute bottom-0 left-0 w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] rounded-full bg-forest/15 blur-[100px] md:blur-[150px] pointer-events-none -translate-x-1/4 translate-y-1/4 z-0" />
 
-        {/* Hero Content Container */}
-        <div className="max-w-[1280px] mx-auto px-6 md:px-8 w-full flex-grow flex flex-col lg:flex-row items-center justify-between gap-12 relative z-20 pt-8 lg:pt-0">
-          {/* Left Column (Text & Buttons) */}
+        <div className="max-w-[1280px] mx-auto w-full flex-grow flex flex-col lg:flex-row items-center justify-between gap-12 relative z-20 pt-8 lg:pt-0">
           <div className="w-full lg:w-[55%] space-y-6">
-            {/* Tagline */}
             <ScrollReveal delay={0.1}>
               <span className="font-syne text-xs md:text-sm uppercase tracking-tag bg-forest/60 border border-forest px-4 py-1.5 rounded-full text-lime font-semibold">
                 Foodpark India
               </span>
             </ScrollReveal>
 
-            {/* H1 Heading */}
             <ScrollReveal delay={0.2}>
-              <h1 className="font-syne text-[30px] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-cream leading-[1.1] tracking-editorial">
+              <h1 className="font-syne text-3xl md:text-5xl lg:text-6xl font-extrabold text-cream leading-[1.1] tracking-editorial">
                 <span className="font-normal block text-white">
                   You Don&apos;t Have to Cook
                 </span>
@@ -196,21 +203,18 @@ export default function HomeClient() {
               </h1>
             </ScrollReveal>
 
-            {/* Subheading */}
             <ScrollReveal delay={0.3}>
               <p className="font-syne text-sm md:text-base text-gray max-w-xl leading-relaxed uppercase tracking-wider font-semibold">
                 Best Cloud Kitchen in Lucknow — Multi-Brand Delivery Powerhouse
               </p>
             </ScrollReveal>
 
-            {/* Body copy */}
             <ScrollReveal delay={0.35}>
               <p className="font-dmsans text-sm text-gray/80 max-w-xl leading-relaxed">
                 We run 10 distinct food brands out of a single optimized kitchen. Mughlai. Chinese. Biryani. South Indian. Street food. Chai. Salads. Sandwiches. You invest once — we handle every single thing from kitchen to customer.
               </p>
             </ScrollReveal>
 
-            {/* Buttons */}
             <ScrollReveal delay={0.4}>
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <motion.div
@@ -241,7 +245,6 @@ export default function HomeClient() {
             </ScrollReveal>
           </div>
 
-          {/* Right Column (Floating Food Collage) */}
           <div className="w-full lg:w-[45%] flex justify-center items-center relative h-[360px] sm:h-[480px] lg:h-[550px] mt-12 lg:mt-0">
             <ScrollReveal delay={0.5} className="relative w-full h-full flex justify-center items-center">
               {heroImages.map((imgInfo, idx) => (
@@ -281,7 +284,6 @@ export default function HomeClient() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
         <div className="absolute bottom-28 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none z-20">
           <motion.div
             animate={{ y: [0, 8, 0] }}
@@ -292,7 +294,6 @@ export default function HomeClient() {
           </motion.div>
         </div>
 
-        {/* Hero Bottom Ticker */}
         <div className="w-full">
           <MarqueeTicker />
         </div>
@@ -300,131 +301,157 @@ export default function HomeClient() {
 
       <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
 
-      {/* SECTION 2 — WHY FOODPARK */}
-      <section className="py-20 md:py-[120px] px-6 md:px-8 max-w-[1280px] mx-auto relative z-10">
-        <ScrollReveal staggerChildren className="space-y-16">
-          {/* Header */}
-          <div className="max-w-2xl">
-            <SectionTag text="Why Foodpark" />
+      {/* SECTION 2 — BRAND CARDS STRIP [REPLACE EXISTING TICKER / COLLAGE] */}
+      <section className="py-16 px-5 md:py-24 md:px-8 lg:px-16 max-w-[1280px] mx-auto relative z-10 overflow-hidden">
+        <ScrollReveal className="space-y-8">
+          <div>
+            <SectionTag text="Our Brands" />
             <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
-              This Isn&apos;t Just a Cloud Kitchen. This Is a Food Business System.
+              Order Online From Our Kitchens
             </h2>
-            <p className="font-dmsans text-sm md:text-base text-gray mt-4 leading-relaxed">
-              When most people think of starting a food business, they picture long hours, unpredictable staff, and sleepless nights watching margins bleed. Foodpark was built to completely flip that narrative.
+            <p className="font-dmsans text-sm md:text-base text-gray mt-2">
+              Delicious multi-cuisine options delivered straight to your doorstep via Zomato or Swiggy.
             </p>
           </div>
 
-          {/* Staggered Vertical Alternating Sections */}
-          <div className="flex flex-col space-y-12">
-            {/* Item 1 */}
-            <ScrollRevealItem className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-b border-forest/20 pb-12 last:border-0 last:pb-0">
-              <div className="space-y-4">
-                <span className="font-spacegrotesk text-5xl md:text-6xl font-extrabold text-lime block leading-none">
-                  01
-                </span>
-                <h3 className="font-syne text-2xl font-bold text-cream">
-                  10+ Food Brands Under One Roof
-                </h3>
-                <p className="font-dmsans text-sm text-gray leading-relaxed max-w-lg">
-                  Why settle for one cuisine when you can rule them all? Foodpark operates 10 distinct food brands from a single kitchen — targeting every meal window from morning chai to late-night cravings. Biryani at lunch. Mughlai at dinner. Street food at snack time. Chai running all day.
-                </p>
-              </div>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="relative h-60 w-full rounded-2xl overflow-hidden border border-forest/30 hidden md:block shadow-lg"
+          {/* Horizontally scrollable strip */}
+          <div className="no-scrollbar flex overflow-x-auto gap-6 snap-x snap-mandatory py-4 scroll-smooth">
+            {allBrands.map((brand) => (
+              <ScrollRevealItem
+                key={brand.name}
+                className="w-[230px] sm:w-[260px] md:w-[280px] lg:w-[280px] h-[347px] md:h-[400px] flex-shrink-0 snap-start rounded-2xl relative overflow-hidden group shadow-lg border border-forest/20"
               >
+                {/* Full food image background */}
                 <img
-                  src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80"
-                  alt="Cuisine Spread"
-                  className="w-full h-full object-cover opacity-60"
+                  src={brand.image}
+                  alt={brand.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-richblack via-richblack/60 to-transparent p-6 flex flex-col justify-end text-left">
-                  <span className="font-spacegrotesk text-xs uppercase text-lime tracking-widest block mb-1 font-bold">
-                    Cuisine Diversity
-                  </span>
-                  <p className="font-dmsans text-xs text-cream/90 leading-relaxed">
-                    Mughlai • Chinese • South Indian • Healthy Bowls • Beverages • Street Food • Biryani • Pizza • Sandwiches • Tea
-                  </p>
-                </div>
-              </motion.div>
-            </ScrollRevealItem>
 
-            {/* Item 2 */}
-            <ScrollRevealItem className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-b border-forest/20 pb-12 last:border-0 last:pb-0">
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="relative h-60 w-full rounded-2xl overflow-hidden border border-forest/30 hidden md:block order-2 md:order-1 shadow-lg"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80"
-                  alt="Pan-India Expansion"
-                  className="w-full h-full object-cover opacity-60"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-richblack via-richblack/60 to-transparent p-6 flex flex-col justify-end text-left">
-                  <span className="font-spacegrotesk text-xs uppercase text-lime tracking-widest block mb-1 font-bold">
-                    National Expansion
-                  </span>
-                  <p className="font-dmsans text-xs text-cream/90 leading-relaxed">
-                    Lucknow HQ → Delhi NCR, Mumbai, Bengaluru, Hyderabad, Pune & 13+ more cities
-                  </p>
-                </div>
-              </motion.div>
-              <div className="space-y-4 order-1 md:order-2">
-                <span className="font-spacegrotesk text-5xl md:text-6xl font-extrabold text-lime block leading-none">
-                  02
-                </span>
-                <h3 className="font-syne text-2xl font-bold text-cream">
-                  Pan-India Expansion, Rooted in Lucknow
-                </h3>
-                <p className="font-dmsans text-sm text-gray leading-relaxed max-w-lg">
-                  Born in the City of Nawabs. Built for the Nation. Lucknow is not just our headquarters — it is our identity. From this foundation, Foodpark is aggressively scaling into Delhi NCR, Mumbai, Bengaluru, Hyderabad, Pune, and every major metro in between.
-                </p>
-              </div>
-            </ScrollRevealItem>
+                {/* Subtle dark gradient overlay from bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
 
-            {/* Item 3 */}
-            <ScrollRevealItem className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center border-b border-forest/20 pb-12 last:border-0 last:pb-0">
-              <div className="space-y-4">
-                <span className="font-spacegrotesk text-5xl md:text-6xl font-extrabold text-lime block leading-none">
-                  03
-                </span>
-                <h3 className="font-syne text-2xl font-bold text-cream">
-                  The FICO Model: You Own It. We Run It.
-                </h3>
-                <p className="font-dmsans text-sm text-gray leading-relaxed max-w-lg">
-                  Franchise Invested, Company Operated. You make a one-time investment. We set up the kitchen, hire the team, manage quality, integrate with Zomato and Swiggy, and dispatch orders. You receive returns directly to your bank account — every single month. No drama. No logistics nightmares.
-                </p>
-              </div>
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="relative h-60 w-full rounded-2xl overflow-hidden border border-forest/30 hidden md:block shadow-lg"
-              >
-                <img
-                  src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780900313/cf0062012df4a23ade72aa4f9d12690b_mwk6or.jpg"
-                  alt="Passive Ownership FICO"
-                  className="w-full h-full object-cover opacity-60"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-richblack via-richblack/60 to-transparent p-6 flex flex-col justify-end text-left">
-                  <span className="font-spacegrotesk text-xs uppercase text-lime tracking-widest block mb-1 font-bold">
-                    Passive Ownership
-                  </span>
-                  <p className="font-dmsans text-xs text-cream/90 leading-relaxed">
-                    Zero daily operational hassle • Structured monthly earnings • India foodservice: USD 77.54B → USD 125.06B by 2029
-                  </p>
+                {/* Overlay content at bottom */}
+                <div className="absolute inset-0 p-4 flex flex-col justify-end">
+                  {/* Brand Logo & Name */}
+                  <div className="flex items-center mb-4">
+                    <div className="w-10 h-10 rounded-full bg-white p-1 flex-shrink-0 overflow-hidden flex items-center justify-center shadow-md">
+                      <img
+                        src={brandLogos[brand.name]}
+                        alt={brand.name}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div className="ml-3">
+                      <span className="font-spacegrotesk text-[8px] uppercase tracking-wider text-lime block font-bold">
+                        {brand.cuisine}
+                      </span>
+                      <h3 className="font-syne text-base font-bold text-white leading-tight">
+                        {brand.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Zomato & Swiggy Buttons (Min 48px tap height) */}
+                  <div className="grid grid-cols-2 gap-2">
+                    <a
+                      href="#"
+                      className="h-12 flex items-center justify-center bg-[#E23744] text-white font-syne text-xs font-bold rounded-full hover:bg-[#cb323d] active:bg-[#b52d37] transition-colors"
+                    >
+                      Zomato
+                    </a>
+                    <a
+                      href="#"
+                      className="h-12 flex items-center justify-center bg-[#FC8019] text-white font-syne text-xs font-bold rounded-full hover:bg-[#e37317] active:bg-[#ca6615] transition-colors"
+                    >
+                      Swiggy
+                    </a>
+                  </div>
                 </div>
-              </motion.div>
-            </ScrollRevealItem>
+              </ScrollRevealItem>
+            ))}
           </div>
         </ScrollReveal>
       </section>
 
       <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
 
-      {/* SECTION 3 — OUR STORY & VISION */}
-      <section className="py-20 md:py-[120px] px-6 md:px-8 bg-[#161614] relative z-10">
+      {/* SECTION 3 — WHY FOODPARK */}
+      <section className="py-16 px-5 md:py-24 md:px-8 lg:px-16 max-w-[1280px] mx-auto relative z-10">
+        <ScrollReveal staggerChildren className="space-y-12">
+          {/* Header */}
+          <div className="max-w-2xl">
+            <SectionTag text="Why Foodpark" />
+            <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
+              This Isn&apos;t Just a Cloud Kitchen. This Is a Food Business System.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Real Kitchen Image */}
+           <div className="lg:col-span-5 w-full h-[400px] sm:h-[500px] lg:h-[650px] rounded-3xl overflow-hidden border border-forest/30 shadow-lg">
+  <img
+    src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780911017/WhatsApp_Image_2026-06-08_at_2.59.56_PM_wnbib2.jpg"
+    alt="Cloud Kitchen Cooking"
+    className="w-full h-full object-cover object-left"
+  />
+</div>
+
+            {/* Feature Points */}
+            <div className="lg:col-span-7 flex flex-col space-y-6">
+              {/* Point 1 */}
+              <ScrollRevealItem className="flex gap-4 p-5 rounded-2xl border border-forest/20 bg-[#1A1A18]/45 hover:border-lime/30 transition-all duration-300">
+                <div className="w-12 h-12 rounded-full bg-forest/40 border border-lime/20 flex items-center justify-center text-lime flex-shrink-0">
+                  <Sparkles size={20} />
+                </div>
+                <div>
+                  <h3 className="font-syne text-lg font-bold text-cream">
+                    10+ Food Brands Under One Roof
+                  </h3>
+                  <p className="font-dmsans text-sm text-gray mt-1 leading-relaxed">
+                    Why settle for one cuisine when you can rule them all? Foodpark operates 10 distinct food brands from a single kitchen.
+                  </p>
+                </div>
+              </ScrollRevealItem>
+
+              {/* Point 2 */}
+              <ScrollRevealItem className="flex gap-4 p-5 rounded-2xl border border-forest/20 bg-[#1A1A18]/45 hover:border-lime/30 transition-all duration-300">
+                <div className="w-12 h-12 rounded-full bg-forest/40 border border-lime/20 flex items-center justify-center text-lime flex-shrink-0">
+                  <MapPin size={20} />
+                </div>
+                <div>
+                  <h3 className="font-syne text-lg font-bold text-cream">
+                    Pan-India Expansion, Rooted in Lucknow
+                  </h3>
+                  <p className="font-dmsans text-sm text-gray mt-1 leading-relaxed">
+                    Born in Lucknow, scaling to Delhi NCR, Mumbai, Bengaluru, and beyond. Lucknow is our base, but India is our playground.
+                  </p>
+                </div>
+              </ScrollRevealItem>
+
+              {/* Point 3 */}
+              <ScrollRevealItem className="flex gap-4 p-5 rounded-2xl border border-forest/20 bg-[#1A1A18]/45 hover:border-lime/30 transition-all duration-300">
+                <div className="w-12 h-12 rounded-full bg-forest/40 border border-lime/20 flex items-center justify-center text-lime flex-shrink-0">
+                  <TrendingUp size={20} />
+                </div>
+                <div>
+                  <h3 className="font-syne text-lg font-bold text-cream">
+                    The FICO Model: You Own It. We Run It.
+                  </h3>
+                  <p className="font-dmsans text-sm text-gray mt-1 leading-relaxed">
+                    Franchise Invested, Company Operated. You make a one-time investment, and we manage every aspect of the operations.
+                  </p>
+                </div>
+              </ScrollRevealItem>
+            </div>
+          </div>
+        </ScrollReveal>
+      </section>
+
+      <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
+
+      {/* SECTION 4 — OUR STORY */}
+      <section className="py-16 px-5 md:py-24 md:px-8 lg:px-16 bg-[#161614] relative z-10">
         <div className="max-w-[1280px] mx-auto">
           <ScrollReveal className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left text column */}
@@ -435,11 +462,26 @@ export default function HomeClient() {
               </h2>
               <div className="font-dmsans text-gray text-base leading-relaxed space-y-4">
                 <p>
-                  That belief? That the best food businesses of this decade won&apos;t be built in marble-floored restaurants — they&apos;ll be built in smart, lean, technology-driven kitchens that live behind a screen and deliver to your door.
+                  We started with one kitchen, one city, and one stubborn belief: that the best food businesses of this decade won&apos;t be built in marble-floored restaurants — they&apos;ll be built in smart, lean, technology-driven kitchens. Lucknow had incredible food, but lacked a scalable way to deliver it to people wherever they were. Foodpark was built to solve exactly that.
                 </p>
-                <p>
-                  Lucknow had no shortage of incredible food. What it lacked was a scalable, modern way to get that food to people where they were: at home, at their desks, on their phones, in the middle of a busy Tuesday afternoon. Foodpark was built to solve exactly that.
-                </p>
+              </div>
+
+              {/* Mobile Images insertion point */}
+              <div className="block lg:hidden space-y-4 my-6">
+                <div className="w-full h-[200px] rounded-2xl overflow-hidden shadow-md">
+                  <img
+                    src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780911739/4e31c084f48e2d67d0bdccca7432a1df_pcz6ku.jpg"
+                    alt="Chef Cooking"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="w-full h-[200px] rounded-2xl overflow-hidden shadow-md">
+                  <img
+                    src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780911739/a8ded342ac92b01130c954832b0a7a84_dreosv.jpg"
+                    alt="Delivery Packaging"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
 
               <div className="space-y-3 pt-6 border-t border-forest/20">
@@ -447,22 +489,27 @@ export default function HomeClient() {
                   Our Vision
                 </h3>
                 <p className="font-dmsans text-sm text-gray/80 leading-relaxed">
-                  To make great food accessible everywhere — and great food business accessible to everyone. We&apos;re not disrupting the food industry for disruption&apos;s sake. We&apos;re fixing what was always broken — and building something better in its place.
+                  To make great food accessible everywhere — and great food business accessible to everyone.
                 </p>
               </div>
             </div>
 
-            {/* Right quote card */}
-            <div className="lg:col-span-5 relative bg-forest/20 border border-forest/35 p-8 md:p-12 rounded-3xl overflow-hidden min-h-[300px] flex flex-col justify-center">
-              <div className="absolute top-4 left-6 text-lime/10">
-                <Quote size={100} className="stroke-[1.5]" />
+            {/* Desktop Stacked Images Column */}
+            <div className="hidden lg:flex lg:col-span-5 flex-col gap-6">
+              <div className="w-full h-[220px] rounded-3xl overflow-hidden border border-forest/20 shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&h=400&q=80"
+                  alt="Chef Cooking"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <p className="font-syne italic text-lg md:text-2xl text-cream relative z-10 leading-relaxed">
-                &ldquo;Foodpark is not just a business idea — it&apos;s a vision to create opportunities, to empower dreams, and to redefine the way India experiences food. From one city to every corner of the world, this journey is just beginning.&rdquo;
-              </p>
-              <span className="block font-spacegrotesk text-xs uppercase tracking-widest text-lime font-bold mt-4 relative z-10">
-                — Foodpark Ventures India
-              </span>
+              <div className="w-full h-[220px] rounded-3xl overflow-hidden border border-forest/20 shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?auto=format&fit=crop&w=600&h=400&q=80"
+                  alt="Delivery Packaging"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </ScrollReveal>
         </div>
@@ -470,9 +517,9 @@ export default function HomeClient() {
 
       <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
 
-      {/* SECTION 4 — ANIMATED STATS */}
-      <section className="bg-forest py-16 md:py-20 relative z-10 overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+      {/* SECTION 5 — STATS COUNTER */}
+      <section className="bg-forest py-16 px-5 md:py-20 md:px-8 lg:px-16 relative z-10 overflow-hidden">
+        <div className="max-w-[1280px] mx-auto">
           <ScrollReveal staggerChildren className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-4 lg:gap-8">
             <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:border-r last:border-r-0 border-lime/30 lg:px-6">
               <StatCounter value={350000} prefix="₹" isCurrency />
@@ -481,7 +528,7 @@ export default function HomeClient() {
               </p>
             </ScrollRevealItem>
 
-            <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:border-r last:border-r-0 border-lime/30 lg:px-4">
+            <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:border-r last:border-r-0 border-lime/30 lg:px-6">
               <StatCounter value={15000} prefix="₹" suffix="/mo" isCurrency />
               <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold mt-1">
                 Fixed Monthly Returns
@@ -496,7 +543,7 @@ export default function HomeClient() {
             </ScrollRevealItem>
 
             <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:px-6">
-              <StatCounter value={370} suffix="%" />
+              <StatCounter value={205} suffix="%" />
               <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold mt-1">
                 4-Year Growth
               </p>
@@ -507,145 +554,71 @@ export default function HomeClient() {
 
       <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
 
-      {/* SECTION 5 — BRAND PREVIEW */}
-      <section className="py-20 md:py-[120px] px-6 md:px-8 max-w-[1280px] mx-auto relative z-10">
+      {/* SECTION 6 — 10 BRANDS 10 CRAVINGS [REDESIGNED GRID] */}
+      <section className="py-16 px-5 md:py-24 md:px-8 lg:px-16 max-w-[1280px] mx-auto relative z-10">
         <ScrollReveal staggerChildren className="space-y-12">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div className="max-w-2xl">
-              <SectionTag text="Brand Preview" />
-              <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
-                10 Brands. 10 Cravings. One Unstoppable Kitchen Network.
-              </h2>
-              <p className="font-dmsans text-sm md:text-base text-gray mt-4">
-                Every brand in the Foodpark family was built with a specific hunger in mind — a specific audience, a specific moment in the day, a specific craving that deserves its own identity.
-              </p>
-            </div>
-            <Link
-              href="/brands"
-              className="inline-flex items-center text-lime font-syne font-bold text-sm hover:text-white hover:translate-x-1 transition-all duration-300 md:mb-1 group"
-            >
-              View All Brands{" "}
-              <ArrowRight
-                size={16}
-                className="ml-2 group-hover:translate-x-1 transition-transform"
-              />
-            </Link>
+          <div className="max-w-2xl">
+            <SectionTag text="Brand Portfolio" />
+            <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
+              10 Brands. 10 Cravings. One Unstoppable Kitchen Network.
+            </h2>
+            <p className="font-dmsans text-sm md:text-base text-gray mt-4">
+              Every brand in the Foodpark family was built with a specific hunger in mind — a specific audience, a specific moment in the day, a specific craving that deserves its own identity.
+            </p>
           </div>
 
-          {/* Interactive Card Stack Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Nav column */}
-            <div className="lg:col-span-5 flex flex-row lg:flex-col overflow-x-auto lg:overflow-visible gap-3 lg:gap-4 no-scrollbar pb-4 lg:pb-0 w-full">
-              {brandTeasers.map((brand, index) => {
-                const isActive = index === activeBrandIdx;
-                return (
-                  <button
-                    key={brand.name}
-                    onClick={() => setActiveBrandIdx(index)}
-                    className={`flex-shrink-0 text-left px-5 py-4 rounded-xl border transition-all duration-300 flex items-center justify-between w-[220px] sm:w-[260px] lg:w-full ${
-                      isActive
-                        ? "bg-forest/20 border-lime text-lime shadow-[0_4px_20px_rgba(212,223,0,0.05)] lg:translate-x-1"
-                        : "bg-[#1A1A18]/60 border-forest/20 text-gray hover:border-lime/30 hover:text-white"
-                    }`}
-                  >
-                    <div className="space-y-1">
-                      <span className="font-spacegrotesk text-[10px] uppercase tracking-widest text-lime/75 font-semibold block">
-                        {brand.cuisine}
-                      </span>
-                      <span className="font-syne text-lg md:text-xl font-bold block">
-                        {brand.name}
-                      </span>
-                    </div>
-                    <ChevronDown
-                      size={18}
-                      className={`transition-transform duration-300 -rotate-90 hidden lg:block ${
-                        isActive ? "text-lime translate-x-1" : "text-gray/40"
-                      }`}
-                    />
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Right Card Deck column */}
-            <div className="lg:col-span-7 relative h-[380px] sm:h-[400px] w-full max-w-[500px] mx-auto mt-6 lg:mt-0">
-              {brandTeasers.map((brand, index) => (
-                <motion.div
-                  key={brand.name}
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                  }}
-                  animate={getCardStyles(index)}
-                  transition={{
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 22,
-                  }}
-                  className="origin-bottom"
-                >
-                  <div className="w-full h-full bg-[#1A1A18] border-2 border-forest rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative overflow-hidden">
-                    {/* Big background letter watermark */}
-                    <div className="absolute -top-12 -right-8 text-lime/5 font-spacegrotesk text-[180px] font-black select-none pointer-events-none">
-                      {brand.name.charAt(0)}
+          {/* Redesigned Card Grid Layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {allBrands.map((brand) => (
+              <ScrollRevealItem key={brand.name}>
+                <div className="bg-[#1C1C1A] border border-forest/20 rounded-3xl p-6 text-center hover:border-lime/40 hover:shadow-[0_4px_20px_rgba(212,223,0,0.08)] transition-all duration-300 flex flex-col justify-between h-full group">
+                  <div>
+                    {/* Centered Brand Logo */}
+                    <div className="w-28 h-28 rounded-full border-2 border-forest/30 bg-[#1A1A18] flex items-center justify-center mx-auto mb-4 overflow-hidden shadow-lg p-0">
+                      <img
+                        src={brandLogos[brand.name]}
+                        alt={brand.name}
+                        className="w-full h-full object-cover rounded-full"
+                      />
                     </div>
 
-                    <div className="space-y-6 relative z-10">
-                      <div className="flex items-center justify-between">
-                        <span className="bg-lime/10 border border-lime/25 text-lime font-spacegrotesk text-[10px] uppercase font-bold px-3 py-1 rounded-full">
-                          {brand.cuisine}
-                        </span>
-                        <span className="font-spacegrotesk text-xs uppercase tracking-widest text-gray/40 font-bold">
-                          Brand Preview
-                        </span>
-                      </div>
+                    {/* Brand Name */}
+                    <h3 className="font-syne text-xl font-bold text-cream mb-2 group-hover:text-white transition-colors duration-350">
+                      {brand.name}
+                    </h3>
 
-                      <div className="space-y-2">
-                        <h3 className="font-syne text-3xl font-extrabold text-cream leading-none">
-                          {brand.name}
-                        </h3>
-                        <p className="font-dmsans italic text-sm text-lime/80">
-                          &ldquo;{brand.tagline}&rdquo;
-                        </p>
-                      </div>
+                    {/* Cuisine pill badge */}
+                    <span className="inline-block bg-lime/10 border border-lime/25 text-lime font-spacegrotesk text-[10px] uppercase font-bold px-3 py-1 rounded-full mb-4">
+                      {brand.cuisine}
+                    </span>
 
-                      <p className="font-dmsans text-sm text-gray/80 leading-relaxed">
-                        {brand.desc}
-                      </p>
-                    </div>
-
-                    <div className="relative z-10 pt-4 border-t border-forest/20 flex items-center justify-between">
-                      <Link
-                        href="/brands"
-                        className="inline-flex items-center text-lime font-syne font-bold text-sm hover:text-white transition-colors duration-200 group"
-                      >
-                        Explore Menu{" "}
-                        <ArrowRight
-                          size={16}
-                          className="ml-2 group-hover:translate-x-1 transition-transform"
-                        />
-                      </Link>
-                    </div>
+                    {/* Description (trimmed to 2 lines) */}
+                    <p className="font-dmsans text-sm text-gray/80 leading-relaxed max-w-xs mx-auto">
+                      {brand.desc}
+                    </p>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </ScrollRevealItem>
+            ))}
           </div>
         </ScrollReveal>
       </section>
 
       <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
 
-      {/* SECTION 6 — CTA BAND */}
-      <section className="bg-lime py-16 md:py-24 relative z-10">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-8 flex flex-col items-center justify-center text-center gap-8 text-richblack">
+      {/* SECTION 7 — CTA BAND */}
+      <section className="bg-forest py-16 md:py-24 relative z-10 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full bg-lime/10 blur-[120px]" />
+        </div>
+
+        <div className="max-w-[1280px] mx-auto px-6 md:px-8 flex flex-col items-center justify-center text-center gap-8 relative z-10">
           <div className="max-w-2xl space-y-4 flex flex-col items-center text-center">
-            <h2 className="font-syne text-3xl md:text-5xl font-extrabold leading-tight tracking-editorial">
+            <h2 className="font-syne text-3xl md:text-5xl font-extrabold leading-tight tracking-editorial text-cream">
               Ready to Own a Food Business Without Running It?
             </h2>
-            <p className="font-dmsans text-sm md:text-base opacity-90 leading-relaxed max-w-xl">
+            <p className="font-dmsans text-sm md:text-base text-gray leading-relaxed max-w-xl">
               Investing in a cloud kitchen franchise in Lucknow has never been this straightforward. Start with ₹3,50,000. Pick your brand. Let Foodpark handle the kitchen setup, the staff, the orders, the packaging, and the daily grind — while the returns land in your account every month.
             </p>
           </div>
@@ -656,7 +629,7 @@ export default function HomeClient() {
           >
             <Link
               href="/franchise"
-              className="inline-flex items-center justify-center bg-richblack text-lime font-syne font-bold px-8 py-4 rounded-full text-base shadow-[0_4px_15px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_25px_rgba(0,0,0,0.25)] transition-shadow duration-300 w-full sm:w-auto"
+              className="inline-flex items-center justify-center bg-lime text-richblack font-syne font-bold px-8 py-4 rounded-full text-base shadow-[0_4px_30px_rgba(212,223,0,0.25)] hover:shadow-[0_4px_40px_rgba(212,223,0,0.45)] transition-shadow duration-300 w-full sm:w-auto"
             >
               Apply for Franchise Now — It Takes 2 Minutes
             </Link>

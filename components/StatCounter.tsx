@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useInView, animate } from "framer-motion";
 
 interface StatCounterProps {
@@ -19,37 +19,38 @@ export default function StatCounter({
   isCurrency = false,
 }: StatCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (isInView && ref.current) {
-      const node = ref.current;
+    if (isInView) {
       const controls = animate(0, value, {
         duration: 2.0,
         ease: [0.22, 1, 0.36, 1], // Premium cubic-bezier easing
         onUpdate(latestValue) {
-          let formattedValue = "";
-          if (isCurrency) {
-            formattedValue = new Intl.NumberFormat("en-IN").format(
-              Math.floor(latestValue)
-            );
-          } else {
-            formattedValue = latestValue.toFixed(decimals);
-          }
-          node.textContent = `${prefix}${formattedValue}${suffix}`;
+          setCount(latestValue);
         },
       });
 
       return () => controls.stop();
     }
-  }, [isInView, value, prefix, suffix, decimals, isCurrency]);
+  }, [isInView, value]);
+
+  let formattedValue = "";
+  if (isCurrency) {
+    formattedValue = new Intl.NumberFormat("en-IN").format(
+      Math.floor(count)
+    );
+  } else {
+    formattedValue = count.toFixed(decimals);
+  }
 
   return (
     <span
       ref={ref}
       className="font-spacegrotesk text-3xl sm:text-4xl md:text-[44px] lg:text-[44px] xl:text-[52px] font-extrabold text-lime block leading-none tracking-tight mb-2"
     >
-      {prefix}0{suffix}
+      {prefix}{formattedValue}{suffix}
     </span>
   );
 }
