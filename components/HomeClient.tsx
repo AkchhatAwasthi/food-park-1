@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { ChevronDown, Sparkles, MapPin, TrendingUp } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -84,7 +84,7 @@ export default function HomeClient() {
     },
   ];
 
-  const [heroStack, setHeroStack] = useState([0, 1, 2, 3, 4]);
+  const [heroStack, setHeroStack] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
   const rotateHeroStack = () => {
     setHeroStack((prev) => {
@@ -97,6 +97,13 @@ export default function HomeClient() {
   const [isMobile, setIsMobile] = useState(false);
   const stackRef = useRef<HTMLDivElement>(null);
   const isStackInView = useInView(stackRef, { once: true, amount: 0.3 });
+
+  // Scroll hint for brand strip
+  const scrollStripRef = useRef<HTMLDivElement>(null);
+  const [showScrollHint, setShowScrollHint] = useState(true);
+  const handleStripScroll = useCallback(() => {
+    if (showScrollHint) setShowScrollHint(false);
+  }, [showScrollHint]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -152,7 +159,37 @@ export default function HomeClient() {
       title: "Salad Story",
       colorClass: "border-lime",
       textClass: "text-lime"
-    }
+    },
+    {
+      src: "https://res.cloudinary.com/dmj0smemf/image/upload/v1780910804/4341312ac0b006b1dfeab30e0a4ba9db_k4jjwl.jpg",
+      title: "Chaat Bazaar",
+      colorClass: "border-lime",
+      textClass: "text-lime"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+      title: "Sambhar Sutra",
+      colorClass: "border-forest",
+      textClass: "text-cream"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+      title: "The Indian Plate",
+      colorClass: "border-forest",
+      textClass: "text-cream"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80",
+      title: "Toast Mafia",
+      colorClass: "border-lime",
+      textClass: "text-lime"
+    },
+    {
+      src: "https://res.cloudinary.com/dmj0smemf/image/upload/v1780912330/e92872fcfde7e1a0541f1f5835a4cb38_uvrkc9.jpg",
+      title: "Zauqeen",
+      colorClass: "border-forest",
+      textClass: "text-cream"
+    },
   ];
 
   const getHeroCardStyles = (idx: number) => {
@@ -355,16 +392,37 @@ export default function HomeClient() {
         <ScrollReveal className="space-y-8">
           <div>
             <SectionTag text="Our Brands" />
-            <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
-              Order Online From Our Kitchens
-            </h2>
+            <div className="flex flex-wrap items-end gap-4">
+              <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
+                Order Online From Our Kitchens
+              </h2>
+              {/* Animated scroll hint chip */}
+              <motion.div
+                animate={showScrollHint ? { opacity: 1, x: [0, 6, 0] } : { opacity: 0, x: 0 }}
+                transition={showScrollHint ? { x: { repeat: Infinity, duration: 1.2, ease: "easeInOut" }, opacity: { duration: 0.4 } } : { opacity: { duration: 0.35 } }}
+                className="mb-1 flex items-center gap-1.5 bg-lime/10 border border-lime/30 text-lime font-spacegrotesk text-[10px] uppercase font-bold px-3 py-1.5 rounded-full select-none pointer-events-none"
+              >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+                Scroll to explore
+              </motion.div>
+            </div>
             <p className="font-dmsans text-sm md:text-base text-gray mt-2">
               Delicious multi-cuisine options delivered straight to your doorstep via Zomato or Swiggy.
             </p>
           </div>
 
-          {/* Horizontally scrollable strip */}
-          <div className="no-scrollbar flex overflow-x-auto gap-6 snap-x snap-mandatory py-4 scroll-smooth">
+          {/* Horizontally scrollable strip with right-fade overlay */}
+          <div className="relative">
+            {/* Right-edge fade — signals more content */}
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-richblack to-transparent z-10" />
+
+          <div
+            ref={scrollStripRef}
+            onScroll={handleStripScroll}
+            className="no-scrollbar flex overflow-x-auto gap-6 snap-x snap-mandatory py-4 scroll-smooth pr-16"
+          >
             {allBrands.map((brand) => (
               <ScrollRevealItem
                 key={brand.name}
@@ -384,11 +442,11 @@ export default function HomeClient() {
                 <div className="absolute inset-0 p-4 flex flex-col justify-end">
                   {/* Brand Logo & Name */}
                   <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 rounded-full bg-white p-1 flex-shrink-0 overflow-hidden flex items-center justify-center shadow-md">
+                    <div className="w-10 h-10 rounded-full bg-white flex-shrink-0 overflow-hidden flex items-center justify-center shadow-md">
                       <img
                         src={brandLogos[brand.name]}
                         alt={brand.name}
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-cover scale-125"
                       />
                     </div>
                     <div className="ml-3">
@@ -420,6 +478,7 @@ export default function HomeClient() {
               </ScrollRevealItem>
             ))}
           </div>
+          </div>
         </ScrollReveal>
       </section>
 
@@ -440,7 +499,7 @@ export default function HomeClient() {
             {/* Real Kitchen Image */}
             <div className="lg:col-span-5 w-full h-auto lg:h-[650px] rounded-3xl overflow-hidden border border-forest/30 shadow-lg bg-[#1A1A18]/50">
               <img
-                src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780911017/WhatsApp_Image_2026-06-08_at_2.59.56_PM_wnbib2.jpg"
+                src="https://res.cloudinary.com/dmj0smemf/image/upload/v1781096630/Foodpark_statics_fbjfiu.png"
                 alt="Live Foodpark Kitchen Cooking"
                 className="w-full h-auto lg:h-full lg:object-cover lg:object-left block"
               />
@@ -585,7 +644,7 @@ export default function HomeClient() {
             </ScrollRevealItem>
 
             <ScrollRevealItem className="flex flex-col justify-center items-center text-center lg:border-r last:border-r-0 border-lime/30 lg:px-6">
-              <StatCounter value={20} prefix="~" suffix=" Months" />
+              <StatCounter value={20} prefix="" suffix=" Months" />
               <p className="font-dmsans text-xs md:text-sm text-cream uppercase tracking-wider font-semibold mt-1">
                 Payback Period
               </p>
@@ -624,11 +683,11 @@ export default function HomeClient() {
                 <div className="bg-[#1C1C1A] border border-forest/20 rounded-3xl p-6 text-center hover:border-lime/40 hover:shadow-[0_4px_20px_rgba(212,223,0,0.08)] transition-all duration-300 flex flex-col justify-between h-full group">
                   <div>
                     {/* Centered Brand Logo */}
-                    <div className="w-28 h-28 rounded-full border-2 border-forest/30 bg-[#1A1A18] flex items-center justify-center mx-auto mb-4 overflow-hidden shadow-lg p-0">
+                    <div className="w-28 h-28 rounded-full border-2 border-forest/30 bg-white flex items-center justify-center mx-auto mb-4 overflow-hidden shadow-lg">
                       <img
                         src={brandLogos[brand.name]}
                         alt={brand.name}
-                        className="w-full h-full object-cover rounded-full"
+                        className="w-full h-full object-cover scale-125"
                       />
                     </div>
 

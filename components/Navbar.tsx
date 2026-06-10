@@ -48,7 +48,7 @@ export default function Navbar() {
             className="flex items-center hover:opacity-90 transition-opacity"
           >
             <img
-              src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780901297/foodpark_logo_oizi3x.png"
+              src="https://res.cloudinary.com/dmj0smemf/image/upload/v1781096838/Untitled_design_2_3_hxuivd.png"
               alt="Foodpark Logo"
               className="h-8 md:h-10 w-auto object-contain"
             />
@@ -117,7 +117,7 @@ export default function Navbar() {
                 className="flex items-center hover:opacity-90 transition-opacity"
               >
                 <img
-                  src="https://res.cloudinary.com/dmj0smemf/image/upload/v1780901297/foodpark_logo_oizi3x.png"
+                  src="https://res.cloudinary.com/dmj0smemf/image/upload/v1781096838/Untitled_design_2_3_hxuivd.png"
                   alt="Foodpark Logo"
                   className="h-8 w-auto object-contain"
                 />

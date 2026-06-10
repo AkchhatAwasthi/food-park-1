@@ -318,18 +318,12 @@ export default function AboutClient() {
       <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
 
       {/* SECTION 7 — CTA */}
-      <section className="relative py-20 md:py-32 px-5 md:px-8 overflow-hidden z-10">
-        {/* Background Image with Dark Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80"
-            alt="Indian food feast spread table"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-richblack/90 pointer-events-none" />
+      <section className="bg-forest py-16 md:py-24 relative z-10 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full bg-lime/10 blur-[120px]" />
         </div>
 
-        <div className="max-w-[1280px] mx-auto flex flex-col items-center justify-center text-center gap-8 relative z-10">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-8 flex flex-col items-center justify-center text-center gap-8 relative z-10">
           <div className="max-w-2xl space-y-4 flex flex-col items-center text-center">
             <h2 className="font-syne text-3xl md:text-5xl font-extrabold leading-tight tracking-editorial text-cream">
               Ready to Own a Food Business Without Running It?
@@ -345,7 +339,7 @@ export default function AboutClient() {
           >
             <Link
               href="/franchise"
-              className="inline-flex items-center justify-center bg-lime text-richblack font-syne font-bold px-8 py-4 rounded-full text-base shadow-[0_4px_30px_rgba(212,223,0,0.25)] hover:shadow-[0_4px_40px_rgba(212,223,0,0.45)] transition-shadow duration-300 w-full sm:w-auto h-12"
+              className="inline-flex items-center justify-center bg-lime text-richblack font-syne font-bold px-8 py-4 rounded-full text-base shadow-[0_4px_30px_rgba(212,223,0,0.25)] hover:shadow-[0_4px_40px_rgba(212,223,0,0.45)] transition-shadow duration-300 w-full sm:w-auto"
             >
               Apply for Franchise Now — It Takes 2 Minutes
             </Link>

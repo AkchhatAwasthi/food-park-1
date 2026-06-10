@@ -10,11 +10,12 @@ import SectionTag from "@/components/SectionTag";
 export default function FranchiseClient() {
   const { openModal } = useModal();
   const [dailySales, setDailySales] = useState(5000);
+  const [selectedModel, setSelectedModel] = useState<"fix" | "revenue" | null>(null);
 
   const steps = [
     { num: "01", label: "You Invest" },
     { num: "02", label: "We Operate" },
-    { num: "03", label: "No Staff" },
+    { num: "03", label: "Zero Hassle" },
     { num: "04", label: "You Earn" },
   ];
 
@@ -88,7 +89,7 @@ export default function FranchiseClient() {
             <h1 className="font-syne text-[40px] sm:text-6xl md:text-8xl font-extrabold text-cream leading-[1.05] tracking-editorial">
               <span className="block text-white">You Put In the Money.</span>
               <span className="block text-white">We Put In the Work.</span>
-              <span className="italic font-bold text-lime">You Both Profit.</span>
+              <span className="italic font-bold text-lime">We Both Profit.</span>
             </h1>
             <p className="font-dmsans text-base md:text-xl text-gray max-w-2xl leading-relaxed mx-auto">
               This is the Foodpark FICO franchise — the most hands-free, transparent, and financially compelling cloud kitchen franchise opportunity in Lucknow and across India right now. Low entry cost. Zero operational involvement. Fixed or performance-linked returns. 48-month partnership. Real results.
@@ -180,18 +181,19 @@ export default function FranchiseClient() {
       {/* SECTION 4 — TWO MODELS (PRICING CARDS) */}
       <section className="bg-forest py-20 md:py-[120px] px-6 md:px-8 relative z-10">
         <div className="max-w-[1280px] mx-auto space-y-12">
-          {/* Header */}
-          <div className="max-w-2xl">
+          {/* Header — centered */}
+          <div className="text-center mx-auto max-w-2xl">
             <SectionTag text="Financial Schemes" />
-            <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight">
-              Two Ways to Earn. Both Profitable. You Choose.
+            <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight mt-3">
+              Two Ways to Earn.<br />
+              <span className="text-lime italic">Both Profitable.</span> Your Call.
             </h2>
             <p className="font-dmsans text-sm md:text-base text-cream/80 mt-4">
               We&apos;ve structured two franchise models to match different investor profiles. Whether you want the certainty of a fixed monthly return or the higher upside of a performance-linked revenue share, there&apos;s a Foodpark model built for you.
             </p>
           </div>
 
-          {/* Pricing Cards */}
+          {/* Pricing Cards — equal size, equal base color, lime on hover */}
           <ScrollReveal
             staggerChildren
             className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
@@ -201,19 +203,19 @@ export default function FranchiseClient() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="bg-richblack border border-forest p-8 rounded-2xl flex flex-col justify-between min-h-[550px] shadow-xl"
+                className="group bg-richblack border border-forest/40 hover:bg-lime hover:border-lime p-8 rounded-2xl flex flex-col justify-between min-h-[580px] shadow-xl transition-colors duration-300 cursor-pointer"
               >
                 <div className="space-y-6">
                   <div>
-                    <span className="font-spacegrotesk text-xs uppercase tracking-widest bg-gray/10 border border-gray/30 text-gray px-3 py-1 rounded-full inline-block font-semibold mb-4">
-                      Stable & Predictable
+                    <span className="font-spacegrotesk text-xs uppercase tracking-widest bg-forest/40 group-hover:bg-richblack/15 border border-lime/20 text-lime group-hover:text-richblack px-3 py-1 rounded-full inline-block font-semibold mb-4 transition-colors duration-300">
+                      Stable &amp; Predictable
                     </span>
-                    <h3 className="font-syne text-2xl font-bold text-cream">
+                    <h3 className="font-syne text-2xl font-bold text-cream group-hover:text-richblack transition-colors duration-300">
                       Fix Revenue Model
                     </h3>
                   </div>
 
-                  <div className="divide-y divide-forest/30 font-dmsans text-sm">
+                  <div className="divide-y divide-forest/30 group-hover:divide-richblack/15 font-dmsans text-sm transition-colors duration-300">
                     {[
                       { label: "One-time Investment", val: "₹3,50,000" },
                       { label: "Monthly Fixed Return", val: "₹15,000 (5%)" },
@@ -226,8 +228,8 @@ export default function FranchiseClient() {
                         key={row.label}
                         className="py-3 flex justify-between items-center"
                       >
-                        <span className="text-gray/80">{row.label}</span>
-                        <span className="font-spacegrotesk font-semibold text-cream">
+                        <span className="text-gray/80 group-hover:text-richblack/70 transition-colors duration-300">{row.label}</span>
+                        <span className="font-spacegrotesk font-semibold text-cream group-hover:text-richblack transition-colors duration-300">
                           {row.val}
                         </span>
                       </div>
@@ -235,13 +237,13 @@ export default function FranchiseClient() {
                   </div>
                 </div>
 
-                <div className="space-y-6 pt-6">
-                  <p className="font-dmsans text-xs text-gray/70 italic leading-relaxed">
+                <div className="space-y-4 pt-6">
+                  <p className="font-dmsans text-xs text-gray/70 group-hover:text-richblack/60 italic leading-relaxed transition-colors duration-300">
                     Best For: Investors who value guaranteed, predictable monthly income — salaried professionals, retirees, or first-time investors who want to start conservatively.
                   </p>
                   <button
                     onClick={openModal}
-                    className="w-full border border-gray/40 text-gray hover:border-lime hover:text-lime font-syne font-semibold py-3 px-6 rounded-lg text-sm transition-all duration-300"
+                    className="w-full border border-lime/40 group-hover:border-richblack text-lime group-hover:bg-richblack group-hover:text-lime font-syne font-semibold py-3 px-6 rounded-lg text-sm transition-all duration-300"
                   >
                     Choose Fix Model
                   </button>
@@ -254,24 +256,19 @@ export default function FranchiseClient() {
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="bg-lime text-richblack p-8 rounded-2xl flex flex-col justify-between min-h-[550px] shadow-2xl relative overflow-hidden border-2 border-lime"
+                className="group bg-richblack border border-forest/40 hover:bg-lime hover:border-lime p-8 rounded-2xl flex flex-col justify-between min-h-[580px] shadow-xl transition-colors duration-300 cursor-pointer"
               >
-                {/* Highlight Tag */}
-                <div className="absolute top-0 right-0 bg-richblack text-lime font-spacegrotesk text-[10px] uppercase font-bold py-1 px-4 rounded-bl-lg tracking-widest">
-                  Featured
-                </div>
-
                 <div className="space-y-6">
                   <div>
-                    <span className="font-spacegrotesk text-xs uppercase tracking-widest bg-richblack/10 border border-richblack/20 text-richblack px-3 py-1 rounded-full inline-block font-bold mb-4">
+                    <span className="font-spacegrotesk text-xs uppercase tracking-widest bg-forest/40 group-hover:bg-richblack/15 border border-lime/20 text-lime group-hover:text-richblack px-3 py-1 rounded-full inline-block font-semibold mb-4 transition-colors duration-300">
                       Higher Returns ⭐
                     </span>
-                    <h3 className="font-syne text-2xl font-bold text-richblack">
+                    <h3 className="font-syne text-2xl font-bold text-cream group-hover:text-richblack transition-colors duration-300">
                       Revenue Sharing Model
                     </h3>
                   </div>
 
-                  <div className="divide-y divide-richblack/10 font-dmsans text-sm">
+                  <div className="divide-y divide-forest/30 group-hover:divide-richblack/15 font-dmsans text-sm transition-colors duration-300">
                     {[
                       { label: "One-time Investment", val: "₹3,50,000" },
                       { label: "Avg. Daily Sales", val: "₹5,000" },
@@ -284,10 +281,10 @@ export default function FranchiseClient() {
                     ].map((row) => (
                       <div
                         key={row.label}
-                        className="py-3 flex justify-between items-center border-richblack/10"
+                        className="py-3 flex justify-between items-center"
                       >
-                        <span className="text-richblack/80">{row.label}</span>
-                        <span className="font-spacegrotesk font-bold text-richblack">
+                        <span className="text-gray/80 group-hover:text-richblack/70 transition-colors duration-300">{row.label}</span>
+                        <span className="font-spacegrotesk font-semibold text-cream group-hover:text-richblack transition-colors duration-300">
                           {row.val}
                         </span>
                       </div>
@@ -295,13 +292,13 @@ export default function FranchiseClient() {
                   </div>
                 </div>
 
-                <div className="space-y-6 pt-6">
-                  <p className="font-dmsans text-xs text-richblack/70 italic leading-relaxed">
+                <div className="space-y-4 pt-6">
+                  <p className="font-dmsans text-xs text-gray/70 group-hover:text-richblack/60 italic leading-relaxed transition-colors duration-300">
                     Best For: Growth-focused investors who want maximum returns and are comfortable with performance-based income. Potentially 80% more earnings vs the Fix Model over 4 years.
                   </p>
                   <button
                     onClick={openModal}
-                    className="w-full bg-richblack text-lime font-syne font-bold py-3 px-6 rounded-lg text-sm hover:scale-[1.02] hover:shadow-[0_4px_15px_rgba(0,0,0,0.2)] transition-all duration-300"
+                    className="w-full border border-lime/40 group-hover:border-richblack text-lime group-hover:bg-richblack group-hover:text-lime font-syne font-semibold py-3 px-6 rounded-lg text-sm transition-all duration-300"
                   >
                     Choose Revenue Share
                   </button>
@@ -363,92 +360,97 @@ export default function FranchiseClient() {
               </span>
             </div>
 
-            {/* Side-by-side comparison */}
+            {/* Side-by-side comparison — click to select */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
               {/* Fix Model Card */}
-              <div className="border border-forest/20 bg-richblack/40 p-6 md:p-8 rounded-2xl space-y-6 flex flex-col justify-between">
+              <div
+                onClick={() => setSelectedModel(selectedModel === "fix" ? null : "fix")}
+                className={`group border p-6 md:p-8 rounded-2xl space-y-6 flex flex-col justify-between cursor-pointer transition-all duration-300 ${
+                  selectedModel === "fix"
+                    ? "bg-lime border-lime shadow-[0_0_30px_rgba(212,223,0,0.2)]"
+                    : "bg-richblack/40 border-forest/20 hover:border-lime/50 hover:bg-richblack/60"
+                }`}
+              >
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="font-syne text-xl font-bold text-cream">Fix Model</span>
-                    <span className="font-spacegrotesk text-xs uppercase bg-gray/10 px-2.5 py-0.5 rounded-full text-gray border border-gray/20">
+                    <span className={`font-syne text-xl font-bold transition-colors duration-300 ${selectedModel === "fix" ? "text-richblack" : "text-cream"}`}>Fix Model</span>
+                    <span className={`font-spacegrotesk text-xs uppercase px-2.5 py-0.5 rounded-full border transition-colors duration-300 ${
+                      selectedModel === "fix" ? "bg-richblack/10 border-richblack/20 text-richblack" : "bg-gray/10 border-gray/20 text-gray"
+                    }`}>
                       Guaranteed
                     </span>
                   </div>
-                  <p className="font-dmsans text-xs text-gray/60">
+                  <p className={`font-dmsans text-xs transition-colors duration-300 ${selectedModel === "fix" ? "text-richblack/60" : "text-gray/60"}`}>
                     A fixed return scheme independent of actual daily kitchen performance.
                   </p>
-                  <div className="divide-y divide-forest/10 font-dmsans text-sm">
-                    <div className="py-2 flex justify-between">
-                      <span className="text-gray/80">Monthly Income</span>
-                      <span className="font-spacegrotesk font-semibold text-cream">₹15,000</span>
-                    </div>
-                    <div className="py-2 flex justify-between">
-                      <span className="text-gray/80">Payback Period</span>
-                      <span className="font-spacegrotesk font-semibold text-cream">~23.3 Months</span>
-                    </div>
-                    <div className="py-2 flex justify-between">
-                      <span className="text-gray/80">4-Year Total Earnings</span>
-                      <span className="font-spacegrotesk font-semibold text-cream">₹7,20,000</span>
-                    </div>
-                    <div className="py-2 flex justify-between">
-                      <span className="text-gray/80">Total ROI</span>
-                      <span className="font-spacegrotesk font-semibold text-cream">205.7%</span>
-                    </div>
+                  <div className={`divide-y font-dmsans text-sm transition-colors duration-300 ${selectedModel === "fix" ? "divide-richblack/15" : "divide-forest/10"}`}>
+                    {[
+                      { label: "Monthly Income", val: "₹15,000" },
+                      { label: "Payback Period", val: "~20 Months" },
+                      { label: "4-Year Total Earnings", val: "₹7,20,000" },
+                      { label: "Total ROI", val: "205.7%" },
+                    ].map((row) => (
+                      <div key={row.label} className="py-2 flex justify-between">
+                        <span className={`transition-colors duration-300 ${selectedModel === "fix" ? "text-richblack/70" : "text-gray/80"}`}>{row.label}</span>
+                        <span className={`font-spacegrotesk font-semibold transition-colors duration-300 ${selectedModel === "fix" ? "text-richblack" : "text-cream"}`}>{row.val}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <button
-                  onClick={openModal}
-                  className="w-full border border-forest/30 text-cream hover:border-lime hover:text-lime font-syne font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 mt-4"
+                  onClick={(e) => { e.stopPropagation(); openModal(); }}
+                  className={`w-full font-syne font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 mt-4 ${
+                    selectedModel === "fix"
+                      ? "bg-richblack text-lime hover:bg-richblack/80"
+                      : "border border-forest/30 text-cream hover:border-lime hover:text-lime"
+                  }`}
                 >
                   Choose Fix Model
                 </button>
               </div>
 
               {/* Revenue Sharing Model Card */}
-              <div className="border-2 border-lime bg-lime/5 p-6 md:p-8 rounded-2xl space-y-6 flex flex-col justify-between shadow-lg relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-lime text-richblack font-spacegrotesk text-[9px] uppercase font-bold py-1 px-3 rounded-bl-lg tracking-wider">
-                  High Growth
-                </div>
+              <div
+                onClick={() => setSelectedModel(selectedModel === "revenue" ? null : "revenue")}
+                className={`group border p-6 md:p-8 rounded-2xl space-y-6 flex flex-col justify-between cursor-pointer transition-all duration-300 ${
+                  selectedModel === "revenue"
+                    ? "bg-lime border-lime shadow-[0_0_30px_rgba(212,223,0,0.2)]"
+                    : "bg-richblack/40 border-forest/20 hover:border-lime/50 hover:bg-richblack/60"
+                }`}
+              >
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="font-syne text-xl font-bold text-lime">Revenue Share</span>
-                    <span className="font-spacegrotesk text-xs uppercase bg-lime/10 px-2.5 py-0.5 rounded-full text-lime border border-lime/20">
+                    <span className={`font-syne text-xl font-bold transition-colors duration-300 ${selectedModel === "revenue" ? "text-richblack" : "text-cream"}`}>Revenue Share</span>
+                    <span className={`font-spacegrotesk text-xs uppercase px-2.5 py-0.5 rounded-full border transition-colors duration-300 ${
+                      selectedModel === "revenue" ? "bg-richblack/10 border-richblack/20 text-richblack" : "bg-gray/10 border-gray/20 text-gray"
+                    }`}>
                       18% Royalty
                     </span>
                   </div>
-                  <p className="font-dmsans text-xs text-gray/60">
+                  <p className={`font-dmsans text-xs transition-colors duration-300 ${selectedModel === "revenue" ? "text-richblack/60" : "text-gray/60"}`}>
                     Returns scale dynamically based on the monthly sales of your selected brand.
                   </p>
-                  <div className="divide-y divide-lime/10 font-dmsans text-sm">
-                    <div className="py-2 flex justify-between">
-                      <span className="text-gray/80">Monthly Income</span>
-                      <span className="font-spacegrotesk font-bold text-lime">
-                        ₹{Math.round(dailySales * 30 * 0.18).toLocaleString("en-IN")}
-                      </span>
-                    </div>
-                    <div className="py-2 flex justify-between">
-                      <span className="text-gray/80">Payback Period</span>
-                      <span className="font-spacegrotesk font-bold text-lime">
-                        ~{(350000 / (dailySales * 30 * 0.18)).toFixed(1)} Months
-                      </span>
-                    </div>
-                    <div className="py-2 flex justify-between">
-                      <span className="text-gray/80">4-Year Total Earnings</span>
-                      <span className="font-spacegrotesk font-bold text-lime">
-                        ₹{Math.round(dailySales * 30 * 0.18 * 48).toLocaleString("en-IN")}
-                      </span>
-                    </div>
-                    <div className="py-2 flex justify-between">
-                      <span className="text-gray/80">Total ROI</span>
-                      <span className="font-spacegrotesk font-bold text-lime">
-                        {Math.round(((dailySales * 30 * 0.18 * 48) / 350000) * 100)}%
-                      </span>
-                    </div>
+                  <div className={`divide-y font-dmsans text-sm transition-colors duration-300 ${selectedModel === "revenue" ? "divide-richblack/15" : "divide-forest/10"}`}>
+                    {[
+                      { label: "Monthly Income", val: `₹${Math.round(dailySales * 30 * 0.18).toLocaleString("en-IN")}` },
+                      { label: "Payback Period", val: `~${(350000 / (dailySales * 30 * 0.18)).toFixed(1)} Months` },
+                      { label: "4-Year Total Earnings", val: `₹${Math.round(dailySales * 30 * 0.18 * 48).toLocaleString("en-IN")}` },
+                      { label: "Total ROI", val: `${Math.round(((dailySales * 30 * 0.18 * 48) / 350000) * 100)}%` },
+                    ].map((row) => (
+                      <div key={row.label} className="py-2 flex justify-between">
+                        <span className={`transition-colors duration-300 ${selectedModel === "revenue" ? "text-richblack/70" : "text-gray/80"}`}>{row.label}</span>
+                        <span className={`font-spacegrotesk font-semibold transition-colors duration-300 ${selectedModel === "revenue" ? "text-richblack" : "text-cream"}`}>{row.val}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <button
-                  onClick={openModal}
-                  className="w-full bg-lime text-richblack font-syne font-bold py-2.5 rounded-xl text-sm hover:scale-[1.02] transition-transform duration-200 mt-4"
+                  onClick={(e) => { e.stopPropagation(); openModal(); }}
+                  className={`w-full font-syne font-semibold py-2.5 rounded-xl text-sm transition-all duration-300 mt-4 ${
+                    selectedModel === "revenue"
+                      ? "bg-richblack text-lime hover:bg-richblack/80"
+                      : "border border-forest/30 text-cream hover:border-lime hover:text-lime"
+                  }`}
                 >
                   Choose Revenue Share
                 </button>
@@ -553,20 +555,6 @@ export default function FranchiseClient() {
             ))}
           </div>
         </div>
-      </section>
-
-      <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
-
-      {/* SECTION 7 — MARKET STAT BAND */}
-      <section className="bg-lime py-16 px-6 md:px-8 text-center relative z-10 text-richblack">
-        <ScrollReveal className="max-w-4xl mx-auto space-y-4">
-          <h2 className="font-spacegrotesk text-xl sm:text-2xl md:text-[38px] font-extrabold leading-snug tracking-tight">
-            &ldquo;India Foodservice Market: USD 77.54B (2024) → USD 125.06B (2029) at 10.03% CAGR&rdquo;
-          </h2>
-          <p className="font-dmsans text-xs sm:text-sm uppercase tracking-widest font-bold opacity-80">
-            The market is growing. Your opportunity is now.
-          </p>
-        </ScrollReveal>
       </section>
 
       <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />

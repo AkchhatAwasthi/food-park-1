@@ -169,14 +169,18 @@ export default function BrandsClient() {
       <hr className="border-t-2 border-lime w-full opacity-100 relative z-10" />
 
       {/* SECTION 3 — BOTTOM CTA */}
-      <section className="bg-lime py-16 md:py-24 relative z-10">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-8 flex flex-col items-center justify-center text-center gap-8 text-richblack">
+      <section className="bg-forest py-16 md:py-24 relative z-10 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full bg-lime/10 blur-[120px]" />
+        </div>
+
+        <div className="max-w-[1280px] mx-auto px-6 md:px-8 flex flex-col items-center justify-center text-center gap-8 relative z-10">
           <div className="max-w-2xl space-y-4 flex flex-col items-center text-center">
-            <h2 className="font-syne text-3xl md:text-5xl font-extrabold leading-tight tracking-editorial">
-              Your Brand is Waiting. Your Kitchen is Ready. Are You?
+            <h2 className="font-syne text-3xl md:text-5xl font-extrabold leading-tight tracking-editorial text-cream">
+              Ready to Own a Food Business Without Running It?
             </h2>
-            <p className="font-dmsans text-sm md:text-base opacity-90 leading-relaxed max-w-xl">
-              Pick the brand that excites you most. Or pick two. Or all ten — we&apos;ll find a structure that works for your investment goals. The Foodpark cloud kitchen franchise in Lucknow and across India gives you the freedom to own any brand in our portfolio, with full operational management handled by our team.
+            <p className="font-dmsans text-sm md:text-base text-gray leading-relaxed max-w-xl">
+              Investing in a cloud kitchen franchise in Lucknow has never been this straightforward. Start with ₹3,50,000. Pick your brand. Let Foodpark handle the kitchen setup, the staff, the orders, the packaging, and the daily grind — while the returns land in your account every month.
             </p>
           </div>
           <motion.div
@@ -186,9 +190,9 @@ export default function BrandsClient() {
           >
             <Link
               href="/franchise"
-              className="inline-flex items-center justify-center bg-richblack text-lime font-syne font-bold px-8 py-4 rounded-full text-base shadow-[0_4px_15px_rgba(0,0,0,0.15)] hover:shadow-[0_4px_25px_rgba(0,0,0,0.25)] transition-shadow duration-300 w-full sm:w-auto"
+              className="inline-flex items-center justify-center bg-lime text-richblack font-syne font-bold px-8 py-4 rounded-full text-base shadow-[0_4px_30px_rgba(212,223,0,0.25)] hover:shadow-[0_4px_40px_rgba(212,223,0,0.45)] transition-shadow duration-300 w-full sm:w-auto"
             >
-              Explore Franchise Models & Start Earning
+              Apply for Franchise Now — It Takes 2 Minutes
             </Link>
           </motion.div>
         </div>
