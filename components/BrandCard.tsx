@@ -27,7 +27,7 @@ export default function BrandCard({ name, tagline, cuisine }: BrandCardProps) {
     <motion.div
       whileHover={{ scale: 1.05, y: -8 }}
       transition={{ type: "spring", stiffness: 300, damping: 15 }}
-      className="group relative bg-[#1A1A18] border border-forest/40 p-8 rounded-2xl flex flex-col justify-between overflow-hidden min-h-[220px] cursor-pointer hover:border-lime hover:shadow-[0_12px_35px_-12px_rgba(212,223,0,0.3)] transition-colors duration-300"
+      className="group relative bg-[#F5EDD6] border border-forest/40 p-8 rounded-2xl flex flex-col justify-between overflow-hidden min-h-[220px] cursor-pointer hover:border-lime hover:shadow-[0_12px_35px_-12px_rgba(212,223,0,0.3)] transition-colors duration-300"
     >
       {/* Brand Info with Circular Logo */}
       <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-6">

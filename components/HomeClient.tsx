@@ -8,7 +8,7 @@ import ScrollReveal, { ScrollRevealItem } from "@/components/ScrollReveal";
 import MarqueeTicker from "@/components/MarqueeTicker";
 import StatCounter from "@/components/StatCounter";
 import SectionTag from "@/components/SectionTag";
-import { brandLogos } from "../brandLogos";
+import { brandLogos, brandLogosGrid } from "../brandLogos";
 
 export default function HomeClient() {
   const allBrands = [
@@ -101,9 +101,29 @@ export default function HomeClient() {
   // Scroll hint for brand strip
   const scrollStripRef = useRef<HTMLDivElement>(null);
   const [showScrollHint, setShowScrollHint] = useState(true);
+  const isStripHovered = useRef(false);
   const handleStripScroll = useCallback(() => {
     if (showScrollHint) setShowScrollHint(false);
   }, [showScrollHint]);
+
+  // Auto-scroll the brands strip every 3 seconds
+  useEffect(() => {
+    const strip = scrollStripRef.current;
+    if (!strip) return;
+
+    const CARD_WIDTH = 296; // 280px card + 16px gap
+    const interval = setInterval(() => {
+      if (isStripHovered.current) return;
+      const { scrollLeft, scrollWidth, clientWidth } = strip;
+      const atEnd = scrollLeft + clientWidth >= scrollWidth - 8;
+      strip.scrollTo({
+        left: atEnd ? 0 : scrollLeft + CARD_WIDTH,
+        behavior: atEnd ? "instant" : "smooth",
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -421,6 +441,10 @@ export default function HomeClient() {
           <div
             ref={scrollStripRef}
             onScroll={handleStripScroll}
+            onMouseEnter={() => { isStripHovered.current = true; }}
+            onMouseLeave={() => { isStripHovered.current = false; }}
+            onTouchStart={() => { isStripHovered.current = true; }}
+            onTouchEnd={() => { isStripHovered.current = false; }}
             className="no-scrollbar flex overflow-x-auto gap-6 snap-x snap-mandatory py-4 scroll-smooth pr-16"
           >
             {allBrands.map((brand) => (
@@ -438,25 +462,26 @@ export default function HomeClient() {
                 {/* Subtle dark gradient overlay from bottom */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
 
-                {/* Overlay content at bottom */}
+                {/* Logo pinned to top-left */}
+                <div className="absolute top-4 left-4 z-10">
+                  <div className="w-20 h-20 rounded-full bg-white overflow-hidden flex items-center justify-center shadow-lg border-2 border-white/30">
+                    <img
+                      src={brandLogos[brand.name]}
+                      alt={brand.name}
+                      className="w-full h-full object-cover scale-[1.8]"
+                    />
+                  </div>
+                </div>
+
+                {/* Brand name + cuisine + buttons at bottom */}
                 <div className="absolute inset-0 p-4 flex flex-col justify-end">
-                  {/* Brand Logo & Name */}
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 rounded-full bg-white flex-shrink-0 overflow-hidden flex items-center justify-center shadow-md">
-                      <img
-                        src={brandLogos[brand.name]}
-                        alt={brand.name}
-                        className="w-full h-full object-cover scale-125"
-                      />
-                    </div>
-                    <div className="ml-3">
-                      <span className="font-spacegrotesk text-[8px] uppercase tracking-wider text-lime block font-bold">
-                        {brand.cuisine}
-                      </span>
-                      <h3 className="font-syne text-base font-bold text-white leading-tight">
-                        {brand.name}
-                      </h3>
-                    </div>
+                  <div className="mb-4">
+                    <span className="font-spacegrotesk text-[8px] uppercase tracking-wider text-lime block font-bold">
+                      {brand.cuisine}
+                    </span>
+                    <h3 className="font-syne text-base font-bold text-white leading-tight">
+                      {brand.name}
+                    </h3>
                   </div>
 
                   {/* Zomato & Swiggy Buttons (Min 48px tap height) */}
@@ -680,29 +705,29 @@ export default function HomeClient() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {allBrands.map((brand) => (
               <ScrollRevealItem key={brand.name}>
-                <div className="bg-[#1C1C1A] border border-forest/20 rounded-3xl p-6 text-center hover:border-lime/40 hover:shadow-[0_4px_20px_rgba(212,223,0,0.08)] transition-all duration-300 flex flex-col justify-between h-full group">
+                <div className="bg-[#F5EDD6] border border-forest/40 rounded-3xl p-6 text-center hover:border-lime/50 hover:shadow-[0_6px_30px_rgba(61,74,46,0.35)] transition-all duration-300 flex flex-col justify-between h-full group">
                   <div>
-                    {/* Centered Brand Logo */}
-                    <div className="w-28 h-28 rounded-full border-2 border-forest/30 bg-white flex items-center justify-center mx-auto mb-4 overflow-hidden shadow-lg">
+                    {/* Centered Brand Logo — no circle, no background */}
+                    <div className="w-36 h-36 flex items-center justify-center mx-auto mb-4">
                       <img
-                        src={brandLogos[brand.name]}
+                        src={brandLogosGrid[brand.name]}
                         alt={brand.name}
-                        className="w-full h-full object-cover scale-125"
+                        className="w-full h-full object-contain"
                       />
                     </div>
 
                     {/* Brand Name */}
-                    <h3 className="font-syne text-xl font-bold text-cream mb-2 group-hover:text-white transition-colors duration-350">
+                    <h3 className="font-syne text-xl font-bold text-[#1A1A18] mb-2 group-hover:text-forest transition-colors duration-350">
                       {brand.name}
                     </h3>
 
                     {/* Cuisine pill badge */}
-                    <span className="inline-block bg-lime/10 border border-lime/25 text-lime font-spacegrotesk text-[10px] uppercase font-bold px-3 py-1 rounded-full mb-4">
+                    <span className="inline-block bg-forest/15 border border-forest/40 text-forest font-spacegrotesk text-[10px] uppercase font-bold px-3 py-1 rounded-full mb-4">
                       {brand.cuisine}
                     </span>
 
                     {/* Description (trimmed to 2 lines) */}
-                    <p className="font-dmsans text-sm text-gray/80 leading-relaxed max-w-xs mx-auto">
+                    <p className="font-dmsans text-sm text-[#3A3A35] leading-relaxed max-w-xs mx-auto">
                       {brand.desc}
                     </p>
                   </div>

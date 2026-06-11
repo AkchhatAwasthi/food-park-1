@@ -186,7 +186,7 @@ export default function FranchiseClient() {
             <SectionTag text="Financial Schemes" />
             <h2 className="font-syne text-3xl md:text-5xl font-bold text-white tracking-editorial leading-tight mt-3">
               Two Ways to Earn.<br />
-              <span className="text-lime italic">Both Profitable.</span> Your Call.
+              <span className="text-lime italic">Both Profitable.<br /></span> Your Call.
             </h2>
             <p className="font-dmsans text-sm md:text-base text-cream/80 mt-4">
               We&apos;ve structured two franchise models to match different investor profiles. Whether you want the certainty of a fixed monthly return or the higher upside of a performance-linked revenue share, there&apos;s a Foodpark model built for you.
@@ -196,14 +196,14 @@ export default function FranchiseClient() {
           {/* Pricing Cards — equal size, equal base color, lime on hover */}
           <ScrollReveal
             staggerChildren
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-stretch"
           >
             {/* Left Card — Fix Revenue Model */}
-            <ScrollRevealItem>
+            <ScrollRevealItem className="h-full">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="group bg-richblack border border-forest/40 hover:bg-lime hover:border-lime p-8 rounded-2xl flex flex-col justify-between min-h-[580px] shadow-xl transition-colors duration-300 cursor-pointer"
+                className="group bg-richblack border border-forest/40 hover:bg-lime hover:border-lime p-8 rounded-2xl flex flex-col justify-between h-full shadow-xl transition-colors duration-300 cursor-pointer"
               >
                 <div className="space-y-6">
                   <div>
@@ -239,7 +239,7 @@ export default function FranchiseClient() {
 
                 <div className="space-y-4 pt-6">
                   <p className="font-dmsans text-xs text-gray/70 group-hover:text-richblack/60 italic leading-relaxed transition-colors duration-300">
-                    Best For: Investors who value guaranteed, predictable monthly income — salaried professionals, retirees, or first-time investors who want to start conservatively.
+                    Best For: Investors who value predictable monthly income — salaried professionals, retirees, or first-time investors who want to start conservatively.
                   </p>
                   <button
                     onClick={openModal}
@@ -252,11 +252,11 @@ export default function FranchiseClient() {
             </ScrollRevealItem>
 
             {/* Right Card — Revenue Sharing Model */}
-            <ScrollRevealItem>
+            <ScrollRevealItem className="h-full">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="group bg-richblack border border-forest/40 hover:bg-lime hover:border-lime p-8 rounded-2xl flex flex-col justify-between min-h-[580px] shadow-xl transition-colors duration-300 cursor-pointer"
+                className="group bg-richblack border border-forest/40 hover:bg-lime hover:border-lime p-8 rounded-2xl flex flex-col justify-between h-full shadow-xl transition-colors duration-300 cursor-pointer"
               >
                 <div className="space-y-6">
                   <div>
@@ -377,7 +377,7 @@ export default function FranchiseClient() {
                     <span className={`font-spacegrotesk text-xs uppercase px-2.5 py-0.5 rounded-full border transition-colors duration-300 ${
                       selectedModel === "fix" ? "bg-richblack/10 border-richblack/20 text-richblack" : "bg-gray/10 border-gray/20 text-gray"
                     }`}>
-                      Guaranteed
+                      Predictable ROI
                     </span>
                   </div>
                   <p className={`font-dmsans text-xs transition-colors duration-300 ${selectedModel === "fix" ? "text-richblack/60" : "text-gray/60"}`}>
