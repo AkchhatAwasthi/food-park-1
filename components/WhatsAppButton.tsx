@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 export default function WhatsAppButton() {
-  const phoneNumber = "9105223350876"; // Lucknow phone number from contact details
+  const phoneNumber = "917080488840"; // Contact phone number
   const message = "Hi Foodpark, I'm interested in learning more about your cloud kitchen partnership opportunities.";
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;

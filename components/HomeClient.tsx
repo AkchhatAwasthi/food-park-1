@@ -52,14 +52,14 @@ export default function HomeClient() {
       tagline: "Ghar Jaisa Khana. Ghar Se Behtar Delivery.",
       cuisine: "Pure Veg Indian",
       desc: "Homestyle vegetarian comfort meals: dal tadka, rajma chawal, and fresh flatbreads.",
-      image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&h=800&q=80",
+      image: "https://res.cloudinary.com/dmj0smemf/image/upload/v1781248556/Traditional_Indian_Thali___Homemade_Veg_Meal___Authentic_Indian_Food_Platter.jpg_btotqm.jpg",
     },
     {
       name: "Sambhar Sutra",
       tagline: "Straight from the South. Delivered to Your Door.",
       cuisine: "South Indian",
       desc: "Crispy masala dosas, soft idlis, and hot sambhar crafted from authentic fermented batter.",
-      image: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&h=800&q=80",
+      image: "https://res.cloudinary.com/dmj0smemf/image/upload/v1781248555/dosa.jpg_exobao.jpg",
     },
     {
       name: "Chaat Bazaar",
@@ -187,13 +187,13 @@ export default function HomeClient() {
       textClass: "text-lime"
     },
     {
-      src: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=600&q=80",
+      src: "https://res.cloudinary.com/dmj0smemf/image/upload/v1781248555/dosa.jpg_exobao.jpg",
       title: "Sambhar Sutra",
       colorClass: "border-forest",
       textClass: "text-cream"
     },
     {
-      src: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80",
+      src: "https://res.cloudinary.com/dmj0smemf/image/upload/v1781248556/Traditional_Indian_Thali___Homemade_Veg_Meal___Authentic_Indian_Food_Platter.jpg_btotqm.jpg",
       title: "The Indian Plate",
       colorClass: "border-forest",
       textClass: "text-cream"

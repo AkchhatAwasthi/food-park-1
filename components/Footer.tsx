@@ -62,10 +62,10 @@ export default function Footer() {
           <ul className="space-y-2 text-sm text-richblack/80 font-medium">
             <li>
               <a
-                href="tel:0522-3350876"
+                href="tel:7080488840"
                 className="hover:text-forest transition-colors"
               >
-                📞 0522-3350876
+                📞 70804 88840
               </a>
             </li>
             <li>

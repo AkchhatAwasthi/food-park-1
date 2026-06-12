@@ -576,11 +576,11 @@ export default function FranchiseClient() {
           className="flex flex-col md:flex-row items-center justify-center gap-6 font-spacegrotesk text-sm font-semibold"
         >
           <a
-            href="tel:05223350876"
+            href="tel:7080488840"
             className="flex items-center space-x-3 bg-[#1A1A18] border border-forest/35 py-3 px-6 rounded-full text-cream hover:border-lime/50 transition-colors"
           >
             <Phone size={16} className="text-lime" />
-            <span>0522-3350876</span>
+            <span>70804 88840</span>
           </a>
           <a
             href="mailto:foodparkventuresinfo@gmail.com"
